@@ -24,7 +24,7 @@ export default function LoginPage() {
           </Avatar>
           <h1>Login</h1>
           <Typography>Don't have an account?</Typography>
-          <NavLink to="/user/new">Sign up</NavLink>
+          <NavLink to="/auth/signup">Sign up</NavLink>
         </Grid>
         <TextField
           id="emailInput"

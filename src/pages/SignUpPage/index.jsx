@@ -24,7 +24,7 @@ export default function SignUp() {
           </Avatar>
           <h1>Create new account</h1>
           <Typography>Already registered?</Typography>
-          <NavLink to="/user/login">Login</NavLink>
+          <NavLink to="/auth/login">Login</NavLink>
         </Grid>
         <TextField
           id="nameInput"

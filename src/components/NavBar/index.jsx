@@ -18,7 +18,7 @@ export default function NavBar() {
             <NavLink to="/project/new">Create a new project</NavLink>
           </Button>
           <Button color="inherit">
-            <NavLink to="/user/login">Login</NavLink>
+            <NavLink to="/auth/login">Login</NavLink>
           </Button>
         </Toolbar>
       </AppBar>
