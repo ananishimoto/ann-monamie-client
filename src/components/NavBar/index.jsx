@@ -2,7 +2,6 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
-import IconButton from "@mui/material/IconButton";
 import { Button } from "@mui/material";
 import { Typography } from "@mui/material";
 
@@ -19,7 +18,7 @@ export default function NavBar() {
             <NavLink to="/project/new">Create a new project</NavLink>
           </Button>
           <Button color="inherit">
-            <NavLink to="/login">Login</NavLink>
+            <NavLink to="/user/login">Login</NavLink>
           </Button>
         </Toolbar>
       </AppBar>
