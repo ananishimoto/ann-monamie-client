@@ -7,7 +7,7 @@ import { Button } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
 export default function SignUp() {
-  const loginBackgroundStyle = {
+  const signUpBackgroundStyle = {
     padding: 20,
     height: "70vh",
     width: 400,
@@ -17,13 +17,22 @@ export default function SignUp() {
   return (
     <Grid>
       <NavBar />
-      <Paper elevation={5} style={loginBackgroundStyle}>
+      <Paper elevation={5} style={signUpBackgroundStyle}>
         <Grid align="center">
           <Avatar>
             <AddCircleOutlineSharpIcon />
           </Avatar>
           <h1>Create new account</h1>
+          <Typography>Already registered?</Typography>
+          <NavLink to="/user/login">Login</NavLink>
         </Grid>
+        <TextField
+          id="nameInput"
+          label="Name"
+          variant="standard"
+          fullWidth
+          required
+        />
         <TextField
           id="emailInput"
           label="E-mail"
@@ -40,10 +49,8 @@ export default function SignUp() {
           required
         />
         <Button type="submit" color="secondary" variant="contained" fullWidth>
-          Create new account
+          Sign Up
         </Button>
-        <Typography>Already have an account?</Typography>
-        <NavLink to="/user/login">Log in</NavLink>
       </Paper>
     </Grid>
   );

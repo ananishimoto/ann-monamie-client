@@ -22,7 +22,9 @@ export default function LoginPage() {
           <Avatar>
             <LoginSharpIcon />
           </Avatar>
-          <h1>Log in</h1>
+          <h1>Login</h1>
+          <Typography>Don't have an account?</Typography>
+          <NavLink to="/user/new">Sign up</NavLink>
         </Grid>
         <TextField
           id="emailInput"
@@ -42,8 +44,6 @@ export default function LoginPage() {
         <Button type="submit" color="secondary" variant="contained" fullWidth>
           Log In
         </Button>
-        <Typography>Don't have an account?</Typography>
-        <NavLink to="/user/new">Sign up</NavLink>
       </Paper>
     </Grid>
   );
