@@ -15,14 +15,14 @@ export default function ProjectsPage() {
     dispatch(fetchProjects());
   }, [dispatch]);
 
+  if (projects === null) {
+    return <h2>Loading</h2>;
+  }
+
   return (
     <div>
       <NavBar />
-      {/* <div>
-        {projects.map((project) => (
-          <ProjectCard name={project.name} />
-        ))}
-      </div> */}
+      <ProjectCard projects={projects} />
     </div>
   );
 }

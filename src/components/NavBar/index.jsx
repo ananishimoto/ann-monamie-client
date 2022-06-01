@@ -16,16 +16,20 @@ export default function NavBar() {
     <div className="Navbar">
       <AppBar color="secondary" position="sticky">
         <Toolbar>
-          <NavLink to="/">
+          <NavLink to="/" style={{ color: "white" }}>
             <Typography>Ann Monamie</Typography>
           </NavLink>
           {token && (
             <div>
               <Button>
-                <NavLink to="/projects">Your Projects</NavLink>
+                <NavLink to="/projects" style={{ color: "white" }}>
+                  Your Projects
+                </NavLink>
               </Button>
               <Button>
-                <NavLink to="/project/new">Create a new project</NavLink>
+                <NavLink to="/project/new" style={{ color: "white" }}>
+                  Create a new project
+                </NavLink>
               </Button>
             </div>
           )}

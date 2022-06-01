@@ -1,7 +1,7 @@
 import React from "react";
 import { Grid } from "@mui/material";
 
-export default function PatternCard() {
+export default function PatternCard(props) {
   return (
     <Grid container>
       <Grid item>
