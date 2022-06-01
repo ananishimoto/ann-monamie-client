@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import NavBar from "../../components/NavBar";
-import { Grid, Paper, Avatar, Typography } from "@mui/material";
+import {
+  Grid,
+  Paper,
+  Avatar,
+  Typography,
+  TextField,
+  Button,
+} from "@mui/material";
 import AddCircleOutlineSharpIcon from "@mui/icons-material/AddCircleOutlineSharp";
-import { TextField } from "@mui/material";
-import { Button } from "@mui/material";
-import { NavLink } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { selectToken } from "../../store/user/selectors";
 import { signUp } from "../../store/user/actions";
 
@@ -16,13 +22,19 @@ export default function SignUp() {
   const [getPassword, setPassword] = useState("");
   const dispatch = useDispatch();
   const token = useSelector(selectToken);
+  const navigate = useNavigate();
 
-  function submitForm(event) {
+  useEffect(() => {
+    if (token !== null) {
+      navigate("/projects");
+    }
+  }, [token, navigate]);
+
+  function submitSignUpForm(event) {
     event.preventDefault();
 
     dispatch(signUp(getName, getEmail, getPassword));
-
-    console.log("clean form:");
+    console.log("working?");
 
     setName("");
     setEmail("");
@@ -48,7 +60,7 @@ export default function SignUp() {
           <Typography>Already registered?</Typography>
           <NavLink to="/auth/login">Login</NavLink>
         </Grid>
-        <form onSubmit={submitForm}>
+        <form onSubmit={submitSignUpForm}>
           <TextField
             id="nameInput"
             label="Name"
