@@ -10,7 +10,7 @@ export default function LoggedIn() {
   const user = useSelector(selectUser);
   return (
     <>
-      <MenuItem>{user && `Hello, ${user.email}`}</MenuItem>
+      <MenuItem>{user && `Hello, ${user.name}`}</MenuItem>
       <NavLink to="/">
         <Button onClick={() => dispatch(logOut())}>Logout</Button>
       </NavLink>

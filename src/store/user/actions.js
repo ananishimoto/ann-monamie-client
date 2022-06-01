@@ -3,6 +3,7 @@ import axios from "axios";
 import { appLoading, appDoneLoading, setMessage } from "../appState/slice";
 import { showMessageWithTimeout } from "../appState/actions";
 import { loginSuccess, logOut, tokenStillValid } from "./slice";
+import { selectToken } from "./selectors";
 
 export const signUp = (name, email, password) => {
   return async (dispatch, getState) => {
@@ -95,57 +96,38 @@ export const login = (email, password) => {
   };
 };
 
-// export const getUserWithStoredToken = () => {
-//   return async (dispatch, getState) => {
-//     // get token from the state
-//     const token = selectToken(getState());
+export const getUserWithStoredToken = () => {
+  return async (dispatch, getState) => {
+    // get token from the state
+    const token = selectToken(getState());
+    // if we have no token, stop
+    if (token === null) return;
 
-//     // if we have no token, stop
-//     if (token === null) return;
-
-//     dispatch(appLoading());
-//     try {
-//       // if we do have a token,
-//       // check wether it is still valid or if it is expired
-//       const response = await axios.get(`${apiUrl}/auth/me`, {
-//         headers: { Authorization: `Bearer ${token}` },
-//       });
-
-//       // token is still valid
-//       // console.log("me thunk", response.data);
-//       dispatch(
-//         tokenStillValid({
-//           user: response.data.user,
-//           space: response.data.space,
-//         })
-//       );
-//       dispatch(appDoneLoading());
-//     } catch (error) {
-//       if (error.response) {
-//         console.log(error.response.message);
-//       } else {
-//         console.log(error);
-//       }
-//       // if we get a 4xx or 5xx response,
-//       // get rid of the token by logging out
-//       dispatch(logOut());
-//       dispatch(appDoneLoading());
-//     }
-//   };
-// };
-
-// export function deleteSpecificStory(id) {
-//   return async function thunk(dispatch, getState) {
-//     try {
-//       dispatch(appLoading());
-//       const response = await axios.delete(`${apiUrl}/spaces/story/${id}`);
-//       // console.log("This is the delete thunk", response.data);
-
-//       dispatch(deleteStory(id));
-//       // const detailSpace = response.data;
-//       dispatch(appDoneLoading());
-//     } catch (error) {
-//       console.log(error.message);
-//     }
-//   };
-// }
+    dispatch(appLoading());
+    try {
+      // if we do have a token,
+      // check wether it is still valid or if it is expired
+      const response = await axios.get(`${apiUrl}/auth/me`, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      // token is still valid
+      // console.log("me thunk", response.data);
+      dispatch(
+        tokenStillValid({
+          user: response.data,
+        })
+      );
+      dispatch(appDoneLoading());
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.message);
+      } else {
+        console.log(error);
+      }
+      // if we get a 4xx or 5xx response,
+      // get rid of the token by logging out
+      dispatch(logOut());
+      dispatch(appDoneLoading());
+    }
+  };
+};
