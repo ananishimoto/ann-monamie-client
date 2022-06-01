@@ -1,7 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  projectInfo: [],
+  byStatus: null,
+  suggestions: [],
 };
 
 export const projectSlice = createSlice({
@@ -9,7 +10,7 @@ export const projectSlice = createSlice({
   initialState,
   reducers: {
     fetchAllProjects: (state, action) => {
-      state.projectInfo = action.payload;
+      state.byStatus = action.payload;
     },
   },
 });

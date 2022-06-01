@@ -9,18 +9,26 @@ import { selectProjects } from "../../store/project/selectors";
 export default function ProjectsPage() {
   const dispatch = useDispatch();
   const projects = useSelector(selectProjects);
-  console.log("Redux?", projects);
+  console.log("do I have projects?", projects);
 
   useEffect(() => {
     dispatch(fetchProjects());
   }, [dispatch]);
 
-  // console.log("hey yo");
-
   return (
     <div>
       <NavBar />
-      <ProjectCard />
+      {/* <div>
+        {projects.map((project) => (
+          <ProjectCard name={project.name} />
+        ))}
+      </div> */}
     </div>
   );
 }
+
+// {
+//   "WIP": [],
+//   "Finished": [],
+//   "wishlist": []
+// }
