@@ -38,6 +38,8 @@ export default function DetailsPage() {
             name={project.name}
             pattern={project.pattern}
             image={project.image}
+            materials={project.materials}
+            tools={project.tools}
           />
         ))}
       </Grid>

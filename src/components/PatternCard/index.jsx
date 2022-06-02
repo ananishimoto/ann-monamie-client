@@ -2,6 +2,10 @@ import React from "react";
 import { Grid } from "@mui/material";
 
 export default function PatternCard(props) {
+  console.log("This is the card", props.tools);
+  const materials = props.materials;
+  const tools = props.tools;
+
   return (
     <Grid container>
       <Grid item>
@@ -9,8 +13,33 @@ export default function PatternCard(props) {
         <img src={props.image} alt={props.name} width="500" />
       </Grid>
       <Grid item>
-        <h2>Materials</h2>
-        <p>Some text here</p>
+        <Grid item>
+          <h2>Materials</h2>
+          <ul>
+            {materials.map((material) => (
+              <div key={material.id}>
+                <li>
+                  <strong>{material.name}</strong>
+                </li>
+                <li>Color: {material.color}</li>
+                <li>Amount: {material.projectMaterial.materialAmount}</li>
+              </div>
+            ))}
+          </ul>
+        </Grid>
+        <Grid item>
+          <h2>Tools</h2>
+          <ul>
+            {tools.map((tool) => (
+              <div key={tool.id}>
+                <li>
+                  <strong>{tool.name}</strong>
+                </li>
+                <li>Amount: {tool.projectTool.toolAmount}</li>
+              </div>
+            ))}
+          </ul>
+        </Grid>
         <h2>Pattern</h2>
         <p>{props.pattern}</p>
       </Grid>
