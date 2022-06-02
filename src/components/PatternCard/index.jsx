@@ -2,7 +2,7 @@ import React from "react";
 import { Grid } from "@mui/material";
 
 export default function PatternCard(props) {
-  console.log("This is the card", props.tools);
+  // console.log("This is the card", props.tools);
   const materials = props.materials;
   const tools = props.tools;
 

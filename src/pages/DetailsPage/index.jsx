@@ -10,7 +10,7 @@ import { fetchProjectDetails } from "../../store/project/actions";
 
 export default function DetailsPage() {
   const details = useSelector(selectDetails);
-  console.log("this is the details page", details);
+  // console.log("this is the details page", details);
   const { id } = useParams();
   const dispatch = useDispatch();
 

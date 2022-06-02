@@ -27,7 +27,7 @@ export default function NavBar() {
                 </NavLink>
               </Button>
               <Button>
-                <NavLink to="/project/new" style={{ color: "white" }}>
+                <NavLink to="/projects/new" style={{ color: "white" }}>
                   Create a new project
                 </NavLink>
               </Button>

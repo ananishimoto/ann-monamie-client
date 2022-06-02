@@ -15,7 +15,7 @@ export default function ProjectCard(props) {
     margin: "20px auto",
   };
 
-  console.log("Card", Object.keys(props.projects));
+  // console.log("Card", Object.keys(props.projects));
 
   return (
     <Grid style={mainGrid}>
@@ -26,7 +26,7 @@ export default function ProjectCard(props) {
             <Grid key={project.id}>
               <Paper elevation={5} style={cardBackgroundStyle}>
                 <Grid>
-                  <NavLink to={`/project/${project.id}`}>
+                  <NavLink to={`/projects/${project.id}`}>
                     <p>{project.name}</p>
                   </NavLink>
                 </Grid>
