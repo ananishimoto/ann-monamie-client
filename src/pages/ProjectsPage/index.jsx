@@ -9,7 +9,7 @@ import { selectProjects } from "../../store/project/selectors";
 export default function ProjectsPage() {
   const dispatch = useDispatch();
   const projects = useSelector(selectProjects);
-  console.log("do I have projects?", projects);
+  // console.log("do I have projects?", projects);
 
   useEffect(() => {
     dispatch(fetchProjects());
