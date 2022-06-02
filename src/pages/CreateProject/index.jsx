@@ -1,26 +1,46 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { apiUrl } from "../../config/constants";
 import NavBar from "../../components/NavBar";
-import { Grid, Paper, Avatar, Typography } from "@mui/material";
+import {
+  Grid,
+  Paper,
+  Avatar,
+  Typography,
+  Checkbox,
+  FormGroup,
+  FormControlLabel,
+} from "@mui/material";
 import TipsAndUpdatesOutlinedIcon from "@mui/icons-material/TipsAndUpdatesOutlined";
 import { TextField } from "@mui/material";
 import { Button } from "@mui/material";
 import { NavLink } from "react-router-dom";
+import { useDispatch } from "react-redux";
 
 export default function CreateProject() {
+  const dispatch = useDispatch();
+
   const [getName, setName] = useState("");
   const [getMaterials, setMaterials] = useState("");
   const [getTools, setTools] = useState("");
   const [getPattern, setPattern] = useState("");
   const [getImage, setImage] = useState("");
 
+  useEffect(() => {
+    async function fetchMaterialsAndTools() {
+      const response = await axios.get(`${apiUrl}/materials`);
+      setMaterials(response.data.materials);
+      setTools(response.data.tools);
+      // console.log("response", getMaterials, getTools);
+      console.log({ getTools });
+    }
+    fetchMaterialsAndTools();
+  }, [dispatch]);
+
   function submitNewProjectForm(event) {
     event.preventDefault();
 
-    // dispatch(signUp(getName, getEmail, getPassword));
-
     setName("");
-    setTools("");
-    setMaterials("");
     setPattern("");
     setImage("");
   }
@@ -32,14 +52,14 @@ export default function CreateProject() {
     margin: "20px auto",
   };
 
-  console.log(
-    "working?",
-    getName,
-    getMaterials,
-    getTools,
-    getPattern,
-    getImage
-  );
+  // console.log(
+  //   "working?",
+  //   getName,
+  //   getMaterials,
+  //   getTools,
+  //   getPattern,
+  //   getImage
+  // );
 
   return (
     <Grid>
@@ -67,23 +87,31 @@ export default function CreateProject() {
             onChange={(event) => setName(event.target.value)}
           />
           <Typography>Tools</Typography>
-          <TextField
-            id="nameInput"
-            variant="outlined"
-            fullWidth
-            required
-            value={getTools}
-            onChange={(event) => setTools(event.target.value)}
-          />
+          <FormGroup>
+            <Grid>
+              {getTools &&
+                getTools.map((tool) => (
+                  <FormControlLabel
+                    key={tool.id}
+                    control={<Checkbox />}
+                    label={tool.name}
+                  />
+                ))}
+            </Grid>
+          </FormGroup>
           <Typography>Materials</Typography>
-          <TextField
-            id="materialsInput"
-            variant="outlined"
-            fullWidth
-            required
-            value={getMaterials}
-            onChange={(event) => setMaterials(event.target.value)}
-          />
+          <FormGroup>
+            <Grid>
+              {getMaterials &&
+                getMaterials.map((material) => (
+                  <FormControlLabel
+                    key={material.id}
+                    control={<Checkbox />}
+                    label={material.name}
+                  />
+                ))}
+            </Grid>
+          </FormGroup>
           <Typography>Pattern</Typography>
           <TextField
             id="patternInput"
