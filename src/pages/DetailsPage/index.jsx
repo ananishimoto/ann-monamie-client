@@ -2,17 +2,29 @@ import React, { useEffect } from "react";
 import NavBar from "../../components/NavBar";
 import { Button } from "@mui/material";
 import { NavLink, useParams } from "react-router-dom";
-import { Grid } from "@mui/material";
+import { Grid, Paper } from "@mui/material";
 import PatternCard from "../../components/PatternCard";
 import { useDispatch, useSelector } from "react-redux";
 import { selectDetails } from "../../store/project/selectors";
 import { fetchProjectDetails } from "../../store/project/actions";
+import Image from "../../images/watercolorBG.jpg";
 
 export default function DetailsPage() {
   const details = useSelector(selectDetails);
   // console.log("this is the details page", details);
   const { id } = useParams();
   const dispatch = useDispatch();
+
+  const backgroundStyle = {
+    paperContainer: {
+      backgroundImage: `url(${Image})`,
+      backgroundPosition: "center",
+      backgroundSize: "cover",
+      backgroundRepeat: "no-repeat",
+      width: "100vw",
+      height: "100vh",
+    },
+  };
 
   useEffect(() => {
     dispatch(fetchProjectDetails(id));
@@ -25,24 +37,26 @@ export default function DetailsPage() {
   return (
     <Grid>
       <NavBar />
-      <NavLink to="/projects">
-        <Button color="secondary" variant="contained">
-          Back to your projects
-        </Button>
-      </NavLink>
-      <Grid>
-        {details.map((project) => (
-          <PatternCard
-            key={project.id}
-            id={project.id}
-            name={project.name}
-            pattern={project.pattern}
-            image={project.image}
-            materials={project.materials}
-            tools={project.tools}
-          />
-        ))}
-      </Grid>
+      <Paper style={backgroundStyle.paperContainer}>
+        <NavLink to="/projects">
+          <Button color="secondary" variant="contained">
+            Back to your projects
+          </Button>
+        </NavLink>
+        <Grid>
+          {details.map((project) => (
+            <PatternCard
+              key={project.id}
+              id={project.id}
+              name={project.name}
+              pattern={project.pattern}
+              image={project.image}
+              materials={project.materials}
+              tools={project.tools}
+            />
+          ))}
+        </Grid>
+      </Paper>
     </Grid>
   );
 }

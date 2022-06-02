@@ -14,23 +14,19 @@ export default function NavBar() {
 
   return (
     <div className="Navbar">
-      <AppBar color="secondary" position="sticky">
+      <AppBar sx={{ bgcolor: "#ae7d73" }} position="sticky">
         <Toolbar>
           <NavLink to="/" style={{ color: "white" }}>
             <Typography>Ann Monamie</Typography>
           </NavLink>
           {token && (
             <div>
-              <Button>
-                <NavLink to="/projects" style={{ color: "white" }}>
-                  Your Projects
-                </NavLink>
-              </Button>
-              <Button>
-                <NavLink to="/projects/new" style={{ color: "white" }}>
-                  Create a new project
-                </NavLink>
-              </Button>
+              <NavLink to="/projects" style={{ color: "white" }}>
+                Your Projects
+              </NavLink>
+              <NavLink to="/projects/new" style={{ color: "white" }}>
+                Create a new project
+              </NavLink>
             </div>
           )}
           {loginLogoutControls}

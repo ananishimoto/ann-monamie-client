@@ -12,7 +12,7 @@ export default function ProjectCard(props) {
     padding: 20,
     height: 100,
     width: 400,
-    margin: "20px auto",
+    margin: "20px",
   };
 
   // console.log("Card", Object.keys(props.projects));
@@ -24,7 +24,7 @@ export default function ProjectCard(props) {
           <h2>{status}</h2>
           {props.projects[status].map((project) => (
             <Grid key={project.id}>
-              <Paper elevation={5} style={cardBackgroundStyle}>
+              <Paper elevation={1} style={cardBackgroundStyle}>
                 <Grid>
                   <NavLink to={`/projects/${project.id}`}>
                     <p>{project.name}</p>
