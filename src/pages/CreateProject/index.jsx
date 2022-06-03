@@ -16,6 +16,7 @@ import { Button } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import Image from "../../images/watercolorBG.jpg";
+import { createNewProject } from "../../store/project/actions";
 
 export default function CreateProject() {
   const backgroundStyle = {
@@ -39,8 +40,10 @@ export default function CreateProject() {
   const dispatch = useDispatch();
 
   const [getName, setName] = useState("");
-  const [getMaterials, setMaterials] = useState("");
   const [getTools, setTools] = useState("");
+  const [getMaterials, setMaterials] = useState("");
+  const [getNeededTools, setNeededTools] = useState([]);
+  const [getNeededMaterials, setNeededMaterials] = useState([]);
   const [getPattern, setPattern] = useState("");
   const [getImage, setImage] = useState("");
 
@@ -55,22 +58,57 @@ export default function CreateProject() {
     fetchMaterialsAndTools();
   }, [dispatch]);
 
+  const checkedToolBox = (event) => {
+    // console.log("test", event.target.checked);
+    const id = parseInt(event.target.value);
+    // console.log(id);
+    if (event.target.checked) {
+      setNeededTools([...getNeededTools, id]);
+    } else {
+      const UpdatedTools = getNeededTools.filter((toolId) => toolId !== id);
+      setNeededTools(UpdatedTools);
+    }
+  };
+
+  const checkedMaterialBox = (event) => {
+    // console.log("test", event.target.checked);
+    const id = parseInt(event.target.value);
+    // console.log(id);
+    if (event.target.checked) {
+      setNeededMaterials([...getNeededMaterials, id]);
+    } else {
+      const UpdatedMaterials = getNeededMaterials.filter(
+        (toolId) => toolId !== id
+      );
+      setNeededMaterials(UpdatedMaterials);
+    }
+  };
+
   function submitNewProjectForm(event) {
     event.preventDefault();
+    dispatch(
+      createNewProject(
+        getName,
+        getNeededTools,
+        getNeededMaterials,
+        getPattern,
+        getImage
+      )
+    );
 
-    setName("");
-    setPattern("");
-    setImage("");
+    // setName("");
+    // setPattern("");
+    // setImage("");
   }
 
-  console.log(
-    "working?",
-    getName,
-    getMaterials,
-    getTools,
-    getPattern,
-    getImage
-  );
+  // console.log(
+  //   "working?",
+  //   getName,
+  //   getNeededMaterials,
+  //   getNeededTools,
+  //   getPattern,
+  //   getImage
+  // );
 
   return (
     <Grid>
@@ -104,7 +142,9 @@ export default function CreateProject() {
                   getTools.map((tool) => (
                     <FormControlLabel
                       key={tool.id}
-                      control={<Checkbox value={tool.id} />}
+                      control={
+                        <Checkbox value={tool.id} onChange={checkedToolBox} />
+                      }
                       label={tool.name}
                     />
                   ))}
@@ -117,7 +157,12 @@ export default function CreateProject() {
                   getMaterials.map((material) => (
                     <FormControlLabel
                       key={material.id}
-                      control={<Checkbox value={material.id} />}
+                      control={
+                        <Checkbox
+                          value={material.id}
+                          onChange={checkedMaterialBox}
+                        />
+                      }
                       label={material.name}
                     />
                   ))}
