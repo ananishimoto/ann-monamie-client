@@ -1,5 +1,4 @@
 import React from "react";
-import NavBar from "../../components/NavBar";
 import {
   Grid,
   Paper,
@@ -7,6 +6,7 @@ import {
   Typography,
   TextField,
   Button,
+  Box,
 } from "@mui/material";
 import LoginSharpIcon from "@mui/icons-material/LoginSharp";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -28,6 +28,13 @@ export default function LoginPage() {
     },
   };
 
+  const loginBackgroundStyle = {
+    padding: 20,
+    // height: "70vh",
+    width: 400,
+    margin: "0 auto",
+  };
+
   const [getEmail, setEmail] = useState("");
   const [getPassword, setPassword] = useState("");
   const dispatch = useDispatch();
@@ -45,27 +52,21 @@ export default function LoginPage() {
 
     dispatch(login(getEmail, getPassword));
 
-    console.log("clean form:");
+    // console.log("clean form:");
 
     setEmail("");
     setPassword("");
   }
 
-  const loginBackgroundStyle = {
-    padding: 20,
-    height: "70vh",
-    width: 400,
-    margin: "20px auto",
-  };
-
   return (
     <Grid>
       <Paper style={backgroundStyle.paperContainer}>
-        <NavBar />
         <Paper elevation={5} style={loginBackgroundStyle}>
           <Grid align="center">
             <Avatar>
-              <LoginSharpIcon />
+              <LoginSharpIcon
+              // style={{ color: "8a564c" }}
+              />
             </Avatar>
             <h1>Login</h1>
             <Typography>Don't have an account?</Typography>
@@ -92,8 +93,13 @@ export default function LoginPage() {
               onChange={(event) => setPassword(event.target.value)}
             />
             <Button
+              sx={{
+                backgroundColor: "#ae7d73",
+                "&:hover": {
+                  backgroundColor: "#8a564c",
+                },
+              }}
               type="submit"
-              color="secondary"
               variant="contained"
               fullWidth
             >

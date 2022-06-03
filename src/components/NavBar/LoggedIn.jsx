@@ -12,7 +12,15 @@ export default function LoggedIn() {
     <>
       <MenuItem>{user && `Hello, ${user.name}`}</MenuItem>
       <NavLink to="/">
-        <Button onClick={() => dispatch(logOut())}>Logout</Button>
+        <Button
+          sx={{
+            underline: "none",
+            backgroundColor: "#F9F8F4",
+          }}
+          onClick={() => dispatch(logOut())}
+        >
+          Logout
+        </Button>
       </NavLink>
     </>
   );

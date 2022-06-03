@@ -6,32 +6,53 @@ import LoggedIn from "./LoggedIn";
 import LoggedOut from "./LoggedOut";
 import { useSelector } from "react-redux";
 import { selectToken } from "../../store/user/selectors";
-import { Button, Typography } from "@mui/material";
+import { Typography, Link, Box } from "@mui/material";
 
 export default function NavBar() {
   const token = useSelector(selectToken);
   const loginLogoutControls = token ? <LoggedIn /> : <LoggedOut />;
 
   return (
-    <div className="Navbar">
-      <AppBar sx={{ bgcolor: "#ae7d73" }} position="sticky">
-        <Toolbar>
-          <NavLink to="/" style={{ color: "white" }}>
-            <Typography>Ann Monamie</Typography>
-          </NavLink>
-          {token && (
-            <div>
-              <NavLink to="/projects" style={{ color: "white" }}>
-                Your Projects
-              </NavLink>
-              <NavLink to="/projects/new" style={{ color: "white" }}>
-                Create a new project
-              </NavLink>
-            </div>
-          )}
-          {loginLogoutControls}
-        </Toolbar>
-      </AppBar>
-    </div>
+    <>
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+        }}
+      >
+        <AppBar sx={{ bgcolor: "#ae7d73" }} position="sticky">
+          <Toolbar>
+            {/* <Box sx={{ flexDirection: "row", justifyContent: "space-around" }}> */}
+            <Box
+              sx={{
+                margin: 2,
+                flexDirection: "row",
+                justifyContent: "space-around",
+              }}
+            >
+              <Link href="/" underline="none" color="white">
+                <Typography>Ann Monamie</Typography>
+              </Link>
+            </Box>
+            {token && (
+              <>
+                <Box sx={{ margin: 2 }}>
+                  <Link href="/projects" underline="none" color="white">
+                    Your Projects
+                  </Link>
+                </Box>
+                <Box sx={{ margin: 2 }}>
+                  <Link href="/projects/new" underline="none" color="white">
+                    Create a new project
+                  </Link>
+                </Box>
+              </>
+            )}
+            {loginLogoutControls}
+            {/* </Box> */}
+          </Toolbar>
+        </AppBar>
+      </Box>
+    </>
   );
 }

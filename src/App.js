@@ -10,6 +10,8 @@ import SignUpPage from "./pages/SignUpPage";
 import { useDispatch, useSelector } from "react-redux";
 import { selectAppLoading } from "./store/appState/selectors";
 import { getUserWithStoredToken } from "./store/user/actions";
+import MessageBox from "./components/MessageBox";
+import NavBar from "../src/components/NavBar";
 
 function App() {
   const dispatch = useDispatch();
@@ -21,7 +23,9 @@ function App() {
 
   return (
     <div className="App">
-      {isLoading && <h2>Loading</h2>}
+      <NavBar />
+      <MessageBox />
+      {/* {isLoading ? <Loading /> : null} */}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/projects" element={<ProjectsPage />} />

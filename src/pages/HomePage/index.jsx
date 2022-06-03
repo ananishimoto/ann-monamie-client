@@ -1,5 +1,4 @@
 import React from "react";
-import NavBar from "../../components/NavBar";
 import { createTheme, Grid, Paper, Typography } from "@mui/material";
 import Image from "../../images/handsImage.jpg";
 // import { NavLink } from "react-router-dom";
@@ -10,8 +9,7 @@ export default function HomePage() {
   const style = {
     display: "flex",
     flexDirection: "column",
-    margin: 20,
-    padding: 20,
+    padding: 50,
     alignItems: "center",
     justify: "center",
     justifyContent: "center",
@@ -47,7 +45,6 @@ export default function HomePage() {
   return (
     <Grid>
       <Paper style={backgroundStyle.paperContainer}>
-        <NavBar />
         <Grid style={style} container>
           <ThemeProvider theme={titleStyle}>
             <Typography variant="h2" color="#ae7d73">

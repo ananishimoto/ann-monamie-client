@@ -1,8 +1,7 @@
-import { Grid, Paper } from "@mui/material";
+import { Grid, Paper, Typography } from "@mui/material";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // import { NavLink } from "react-router-dom";
-import NavBar from "../../components/NavBar";
 import ProjectCard from "../../components/ProjectCard";
 import { fetchProjects } from "../../store/project/actions";
 import { selectProjects } from "../../store/project/selectors";
@@ -35,7 +34,7 @@ export default function ProjectsPage() {
   return (
     <Grid>
       <Paper style={backgroundStyle.paperContainer}>
-        <NavBar />
+        <Typography variant="h4">Your projects</Typography>
         <ProjectCard projects={projects} />
       </Paper>
     </Grid>

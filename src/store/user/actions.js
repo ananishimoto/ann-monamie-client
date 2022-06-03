@@ -62,7 +62,7 @@ export const login = (email, password) => {
 
       const { token, user } = response.data;
 
-      console.log("This is from user thunk", response.data);
+      // console.log("This is from user thunk", response.data);
       dispatch(
         loginSuccess({
           token,

@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import NavBar from "../../components/NavBar";
 import { Button } from "@mui/material";
 import { NavLink, useParams } from "react-router-dom";
 import { Grid, Paper } from "@mui/material";
@@ -36,7 +35,6 @@ export default function DetailsPage() {
 
   return (
     <Grid>
-      <NavBar />
       <Paper style={backgroundStyle.paperContainer}>
         <NavLink to="/projects">
           <Button color="secondary" variant="contained">

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { apiUrl } from "../../config/constants";
-import NavBar from "../../components/NavBar";
 import {
   Grid,
   Paper,
@@ -75,7 +74,6 @@ export default function CreateProject() {
 
   return (
     <Grid>
-      <NavBar />
       <Paper style={backgroundStyle.paperContainer}>
         <NavLink to="/projects">
           <Button color="secondary" variant="contained">
