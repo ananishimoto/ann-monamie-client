@@ -12,6 +12,7 @@ import { selectAppLoading } from "./store/appState/selectors";
 import { getUserWithStoredToken } from "./store/user/actions";
 import MessageBox from "./components/MessageBox";
 import NavBar from "../src/components/NavBar";
+import Loading from "./components/Loading";
 
 function App() {
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ function App() {
     <div className="App">
       <NavBar />
       <MessageBox />
-      {/* {isLoading ? <Loading /> : null} */}
+      {isLoading ? <Loading /> : null}
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/projects" element={<ProjectsPage />} />
