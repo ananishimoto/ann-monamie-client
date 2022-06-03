@@ -10,8 +10,8 @@ export default function ProjectCard(props) {
 
   const cardBackgroundStyle = {
     padding: 20,
-    height: 100,
-    width: 400,
+    // height: 100,
+    width: 200,
     margin: "20px",
   };
 
@@ -25,7 +25,7 @@ export default function ProjectCard(props) {
           {props.projects[status].map((project) => (
             <Grid key={project.id}>
               <Paper elevation={1} style={cardBackgroundStyle}>
-                <Grid>
+                <Grid align="center">
                   <NavLink to={`/projects/${project.id}`}>
                     <p>{project.name}</p>
                   </NavLink>

@@ -28,7 +28,7 @@ export default function ProjectsPage() {
   }, [dispatch]);
 
   if (projects === null) {
-    return <h2>Loading</h2>;
+    return <h3>Just a moment...</h3>;
   }
 
   return (
