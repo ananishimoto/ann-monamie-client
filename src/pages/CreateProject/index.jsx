@@ -10,18 +10,19 @@ import {
   FormGroup,
   FormControlLabel,
 } from "@mui/material";
+// import { AdvancedImage } from "@cloudinary/react";
 import TipsAndUpdatesOutlinedIcon from "@mui/icons-material/TipsAndUpdatesOutlined";
 import { TextField } from "@mui/material";
 import { Button } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import Image from "../../images/watercolorBG.jpg";
+import BGImage from "../../images/watercolorBG.jpg";
 import { createNewProject } from "../../store/project/actions";
 
 export default function CreateProject() {
   const backgroundStyle = {
     paperContainer: {
-      backgroundImage: `url(${Image})`,
+      backgroundImage: `url(${BGImage})`,
       backgroundPosition: "center",
       backgroundSize: "cover",
       backgroundRepeat: "no-repeat",
@@ -90,6 +91,19 @@ export default function CreateProject() {
     }
   };
 
+  const uploadImage = (files) => {
+    console.log(files[0]);
+    const formData = new FormData();
+    formData.append("file", getImage);
+    formData.append("upload_preset", "default_preset");
+
+    axios
+      .post("https://api.cloudinary.com/v1_1/nishimoto/image/upload", formData)
+      .then((response) => {
+        console.log(response);
+      });
+  };
+
   function submitNewProjectForm(event) {
     event.preventDefault();
     dispatch(
@@ -101,11 +115,11 @@ export default function CreateProject() {
         getImage
       )
     );
-
-    // setName("");
-    // setPattern("");
-    // setImage("");
   }
+
+  // setName("");
+  // setPattern("");
+  // setImage("");
 
   // console.log(
   //   "working?",
@@ -139,7 +153,12 @@ export default function CreateProject() {
             </Avatar>
             <h1>Create a new project</h1>
           </Grid>
-          <form onSubmit={submitNewProjectForm}>
+          <form
+            onSubmit={
+              uploadImage
+              // submitNewProjectForm
+            }
+          >
             <Typography>Project Name</Typography>
             <TextField
               id="nameInput"
@@ -192,14 +211,23 @@ export default function CreateProject() {
               onChange={(event) => setPattern(event.target.value)}
             />
             <Typography>Image</Typography>
-            <TextField
+            <input
+              type="file"
+              onChange={(event) => setImage(event.target.files[0])}
+            />
+            {/* <TextField
               id="imageInput"
               placeholder="Upload your pictures here"
               variant="outlined"
               fullWidth
               value={getImage}
               onChange={(event) => setImage(event.target.value)}
-            />
+            /> */}
+            {/* <AdvancedImage
+              style={{ width: 400 }}
+              cloudname="nishimoto"
+              publicId="https://res.cloudinary.com/nishimoto/image/upload/v1654509497/vbfwiebhbn3hqkhu6ayf.png"
+            /> */}
             <Button
               sx={{
                 backgroundColor: "#ae7d73",

@@ -106,7 +106,7 @@ export const createNewProject = (name, tools, materials, pattern, image) => {
         // headers: { Authorization: `Bearer ${token}` },
       );
 
-      console.log(createProject);
+      // console.log(createProject);
       // const projects = fetchedProjects.data.projects;
       // dispatch(fetchAllProjects(projects));
       dispatch(appDoneLoading());
