@@ -47,6 +47,12 @@ export default function CreateProject() {
   const [getPattern, setPattern] = useState("");
   const [getImage, setImage] = useState("");
 
+  // useEffect(() => {
+  //   export const createdProject = () => {
+  //     navigate("/projects");
+  //   };
+  // }, [createdProject]);
+
   useEffect(() => {
     async function fetchMaterialsAndTools() {
       const response = await axios.get(`${apiUrl}/materials`);
@@ -114,7 +120,15 @@ export default function CreateProject() {
     <Grid>
       <Paper style={backgroundStyle.paperContainer}>
         <NavLink to="/projects">
-          <Button color="secondary" variant="contained">
+          <Button
+            sx={{
+              backgroundColor: "#ae7d73",
+              "&:hover": {
+                backgroundColor: "#8a564c",
+              },
+            }}
+            variant="contained"
+          >
             Back to your projects
           </Button>
         </NavLink>
@@ -187,6 +201,12 @@ export default function CreateProject() {
               onChange={(event) => setImage(event.target.value)}
             />
             <Button
+              sx={{
+                backgroundColor: "#ae7d73",
+                "&:hover": {
+                  backgroundColor: "#8a564c",
+                },
+              }}
               type="submit"
               color="secondary"
               variant="contained"

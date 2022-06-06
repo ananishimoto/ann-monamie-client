@@ -90,17 +90,21 @@ export const fetchProjectDetails = (id) => {
 export const createNewProject = (name, tools, materials, pattern, image) => {
   return async (dispatch, getState) => {
     // const token = selectToken(getState());
+    console.log("Hello", name, tools, materials, pattern, image);
     dispatch(appLoading());
     try {
       console.log("Thunk", name, tools, materials, pattern, image);
-      const createProject = await axios.post(`${apiUrl}/projects/new`, {
+      const createProject = await axios.post(
+        `${apiUrl}/projects/new`,
+        {
+          name,
+          tools,
+          materials,
+          pattern,
+          image,
+        }
         // headers: { Authorization: `Bearer ${token}` },
-        name,
-        tools,
-        materials,
-        pattern,
-        image,
-      });
+      );
 
       console.log(createProject);
       // const projects = fetchedProjects.data.projects;

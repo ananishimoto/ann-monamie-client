@@ -37,7 +37,15 @@ export default function DetailsPage() {
     <Grid>
       <Paper style={backgroundStyle.paperContainer}>
         <NavLink to="/projects">
-          <Button color="secondary" variant="contained">
+          <Button
+            sx={{
+              backgroundColor: "#ae7d73",
+              "&:hover": {
+                backgroundColor: "#8a564c",
+              },
+            }}
+            variant="contained"
+          >
             Back to your projects
           </Button>
         </NavLink>

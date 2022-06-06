@@ -19,7 +19,7 @@ export default function PatternCard(props) {
           padding: 10,
           width: 200,
           height: 300,
-          backgroundColor: "purple",
+          backgroundColor: "#ae7d73",
         }}
       >
         <Grid color="white" item>
@@ -44,7 +44,6 @@ export default function PatternCard(props) {
                 <li>
                   <strong>{tool.name}</strong>
                 </li>
-                <li>Amount: {tool.projectTool.toolAmount}</li>
               </div>
             ))}
           </ul>
