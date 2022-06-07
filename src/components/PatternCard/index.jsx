@@ -30,8 +30,8 @@ export default function PatternCard(props) {
                 <li>
                   <strong>{material.name}</strong>
                 </li>
-                <li>Color: {material.color}</li>
-                <li>Amount: {material.projectMaterial.materialAmount}</li>
+                {/* <li>Color: {material.color}</li> */}
+                {/* <li>Amount: {material.projectMaterial.materialAmount}</li> */}
               </div>
             ))}
           </ul>

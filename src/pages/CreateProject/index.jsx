@@ -9,6 +9,10 @@ import {
   Checkbox,
   FormGroup,
   FormControlLabel,
+  FormControl,
+  FormLabel,
+  RadioGroup,
+  Radio,
 } from "@mui/material";
 // import { AdvancedImage } from "@cloudinary/react";
 import TipsAndUpdatesOutlinedIcon from "@mui/icons-material/TipsAndUpdatesOutlined";
@@ -18,6 +22,8 @@ import { NavLink } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import BGImage from "../../images/watercolorBG.jpg";
 import { createNewProject } from "../../store/project/actions";
+import TextEditor from "../../components/TextEditor";
+import { useRadioGroup } from "@mui/material/RadioGroup";
 
 export default function CreateProject() {
   const backgroundStyle = {
@@ -47,6 +53,7 @@ export default function CreateProject() {
   const [getNeededMaterials, setNeededMaterials] = useState([]);
   const [getPattern, setPattern] = useState("");
   const [getImage, setImage] = useState("");
+  const [getStatus, setStatus] = useState("Wishlist");
 
   // useEffect(() => {
   //   export const createdProject = () => {
@@ -91,28 +98,33 @@ export default function CreateProject() {
     }
   };
 
-  const uploadImage = (files) => {
+  async function uploadImage(files) {
     console.log(files[0]);
     const formData = new FormData();
     formData.append("file", getImage);
     formData.append("upload_preset", "default_preset");
 
-    axios
-      .post("https://api.cloudinary.com/v1_1/nishimoto/image/upload", formData)
-      .then((response) => {
-        console.log(response);
-      });
-  };
+    return axios.post(
+      "https://api.cloudinary.com/v1_1/nishimoto/image/upload",
+      formData
+    );
+    // .then((response) => {
+    //   console.log(response);
+    // });
+  }
 
-  function submitNewProjectForm(event) {
+  async function submitNewProjectForm(event) {
     event.preventDefault();
+    const image = await uploadImage(getImage);
+    console.log("image", image.data.url);
     dispatch(
       createNewProject(
         getName,
         getNeededTools,
         getNeededMaterials,
         getPattern,
-        getImage
+        getStatus,
+        image.data.url
       )
     );
   }
@@ -121,14 +133,15 @@ export default function CreateProject() {
   // setPattern("");
   // setImage("");
 
-  // console.log(
-  //   "working?",
-  //   getName,
-  //   getNeededMaterials,
-  //   getNeededTools,
-  //   getPattern,
-  //   getImage
-  // );
+  console.log(
+    "working?",
+    getName,
+    getNeededTools,
+    getNeededMaterials,
+    getPattern,
+    getStatus
+    // getImage
+  );
 
   return (
     <Grid>
@@ -153,12 +166,7 @@ export default function CreateProject() {
             </Avatar>
             <h1>Create a new project</h1>
           </Grid>
-          <form
-            onSubmit={
-              uploadImage
-              // submitNewProjectForm
-            }
-          >
+          <form onSubmit={submitNewProjectForm}>
             <Typography>Project Name</Typography>
             <TextField
               id="nameInput"
@@ -210,6 +218,38 @@ export default function CreateProject() {
               value={getPattern}
               onChange={(event) => setPattern(event.target.value)}
             />
+            {/* <TextEditor /> */}
+            <Grid>
+              <FormControl>
+                <FormLabel id="project-status-group-label">
+                  Project Status
+                </FormLabel>
+                <RadioGroup
+                  row
+                  value={getStatus}
+                  onChange={(event) => setStatus(event.target.value)}
+                  aria-labelledby="projectStatus"
+                  defaultValue="allStatus"
+                  name="projectStatusButtons"
+                >
+                  <FormControlLabel
+                    value="Wishlist"
+                    control={<Radio />}
+                    label="Wishlist"
+                  />
+                  <FormControlLabel
+                    value="WIP"
+                    control={<Radio />}
+                    label="Work in Progress"
+                  />
+                  <FormControlLabel
+                    value="Finished"
+                    control={<Radio />}
+                    label="Finished"
+                  />
+                </RadioGroup>
+              </FormControl>
+            </Grid>
             <Typography>Image</Typography>
             <input
               type="file"
