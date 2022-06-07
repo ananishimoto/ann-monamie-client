@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Grid } from "@mui/material";
+import { Box, Grid, Typography } from "@mui/material";
 
 export default function PatternCard(props) {
   // console.log("This is the card", props.tools);
@@ -9,16 +9,18 @@ export default function PatternCard(props) {
   return (
     <Grid container justifyContent="space-around" alignItems="center">
       <Grid item>
-        <h1>{props.name}</h1>
+        <Typography variant="h3" sx={{ color: "#ae7d73" }}>
+          {props.name}
+        </Typography>
         <img src={props.image} alt={props.name} width="500" />
       </Grid>
       <Box
         item
         sx={{
-          borderSpacing: 10,
+          // borderSpacing: 10,
           padding: 10,
           width: 200,
-          height: 300,
+          // height: 300,
           backgroundColor: "#ae7d73",
         }}
       >
@@ -36,6 +38,7 @@ export default function PatternCard(props) {
             ))}
           </ul>
         </Grid>
+        <br />
         <Grid color="white" item>
           <h2>Tools</h2>
           <ul>
@@ -48,6 +51,7 @@ export default function PatternCard(props) {
             ))}
           </ul>
         </Grid>
+        <br />
         <Grid color="white">
           <h2>Pattern</h2>
           <p>{props.pattern}</p>

@@ -16,9 +16,13 @@ export const projectSlice = createSlice({
     fetchDetails: (state, action) => {
       state.details = action.payload;
     },
+    deleteProject: (state, action) => {
+      state.details = null;
+    },
   },
 });
 
-export const { fetchAllProjects, fetchDetails } = projectSlice.actions;
+export const { fetchAllProjects, fetchDetails, deleteProject } =
+  projectSlice.actions;
 
 export default projectSlice.reducer;

@@ -18,7 +18,7 @@ import {
 import TipsAndUpdatesOutlinedIcon from "@mui/icons-material/TipsAndUpdatesOutlined";
 import { TextField } from "@mui/material";
 import { Button } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { Navigate, NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import BGImage from "../../images/watercolorBG.jpg";
 import { createNewProject } from "../../store/project/actions";
@@ -45,6 +45,7 @@ export default function CreateProject() {
   };
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [getName, setName] = useState("");
   const [getTools, setTools] = useState("");
@@ -116,7 +117,7 @@ export default function CreateProject() {
   async function submitNewProjectForm(event) {
     event.preventDefault();
     const image = await uploadImage(getImage);
-    console.log("image", image.data.url);
+    // console.log("image", image.data.url);
     dispatch(
       createNewProject(
         getName,
@@ -127,21 +128,22 @@ export default function CreateProject() {
         image.data.url
       )
     );
+    navigate("/projects");
   }
 
   // setName("");
   // setPattern("");
   // setImage("");
 
-  console.log(
-    "working?",
-    getName,
-    getNeededTools,
-    getNeededMaterials,
-    getPattern,
-    getStatus
-    // getImage
-  );
+  // console.log(
+  //   "working?",
+  //   getName,
+  //   getNeededTools,
+  //   getNeededMaterials,
+  //   getPattern,
+  //   getStatus
+  // getImage
+  // );
 
   return (
     <Grid>
@@ -210,15 +212,15 @@ export default function CreateProject() {
               </Grid>
             </FormGroup>
             <Typography>Pattern</Typography>
-            <TextField
+            {/* <TextField
               id="patternInput"
               variant="outlined"
               fullWidth
               required
               value={getPattern}
               onChange={(event) => setPattern(event.target.value)}
-            />
-            {/* <TextEditor /> */}
+            /> */}
+            <TextEditor />
             <Grid>
               <FormControl>
                 <FormLabel id="project-status-group-label">
