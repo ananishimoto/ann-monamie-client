@@ -12,6 +12,7 @@ export default function PatternCard(props) {
         <Typography variant="h3" sx={{ color: "#ae7d73" }}>
           {props.name}
         </Typography>
+        <br />
         <img src={props.image} alt={props.name} width="500" />
       </Grid>
       <Box

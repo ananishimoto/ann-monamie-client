@@ -19,10 +19,17 @@ export const projectSlice = createSlice({
     deleteProject: (state, action) => {
       state.details = null;
     },
+    getInspirationProjects: (state, action) => {
+      state.suggestions = action.payload;
+    },
   },
 });
 
-export const { fetchAllProjects, fetchDetails, deleteProject } =
-  projectSlice.actions;
+export const {
+  fetchAllProjects,
+  fetchDetails,
+  deleteProject,
+  getInspirationProjects,
+} = projectSlice.actions;
 
 export default projectSlice.reducer;

@@ -1,11 +1,13 @@
 import React from "react";
 import { createTheme, Grid, Paper, Typography } from "@mui/material";
 import Image from "../../images/handsImage.jpg";
-// import { NavLink } from "react-router-dom";
-// import { Button } from "@mui/material";
+import { Button } from "@mui/material";
 import { ThemeProvider } from "@mui/system";
+import { useNavigate } from "react-router-dom";
 
 export default function HomePage() {
+  const navigate = useNavigate();
+
   const style = {
     display: "flex",
     flexDirection: "column",
@@ -52,15 +54,18 @@ export default function HomePage() {
               Ann Monamie{" "}
             </Typography>
           </ThemeProvider>
-          {/* <Typography style={subTitleStyle} component="h3">
-            {" "}
-            The plataform to keep your projects organized
-          </Typography>
-          <Grid flexDirection="column">
-            <Button style={buttonStyle} variant="outlined">
-              <NavLink to={"/auth/signup"}>Sign Up now!</NavLink>
-            </Button>
-          </Grid> */}
+          <Button
+            onClick={() => navigate("/auth/signup")}
+            sx={{
+              backgroundColor: "#ae7d73",
+              "&:hover": {
+                backgroundColor: "#8a564c",
+              },
+            }}
+            variant="contained"
+          >
+            Sign up for free
+          </Button>
         </Grid>
       </Paper>
     </Grid>

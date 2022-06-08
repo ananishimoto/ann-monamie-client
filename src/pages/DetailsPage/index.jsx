@@ -9,6 +9,7 @@ import { fetchProjectDetails } from "../../store/project/actions";
 import Image from "../../images/watercolorBG.jpg";
 import { deleteProjectById } from "../../store/project/actions";
 import { useNavigate } from "react-router-dom";
+import Timer from "../../components/Timer";
 
 export default function DetailsPage() {
   const details = useSelector(selectDetails);
@@ -30,7 +31,7 @@ export default function DetailsPage() {
 
   useEffect(() => {
     dispatch(fetchProjectDetails(id));
-  }, [dispatch]);
+  }, [dispatch, id]);
 
   const handleDelete = () => {
     dispatch(deleteProjectById(id));
@@ -69,6 +70,18 @@ export default function DetailsPage() {
             />
           ))}
         </Grid>
+        {/* <Button
+          sx={{
+            backgroundColor: "#ae7d73",
+            "&:hover": {
+              backgroundColor: "#8a564c",
+            },
+          }}
+          variant="contained"
+        >
+          Change the information
+        </Button> */}
+        <Timer />
         <Button
           onClick={() => handleDelete()}
           sx={{
@@ -80,28 +93,6 @@ export default function DetailsPage() {
           variant="contained"
         >
           Delete this project 😞
-        </Button>
-        <Button
-          sx={{
-            backgroundColor: "#ae7d73",
-            "&:hover": {
-              backgroundColor: "#8a564c",
-            },
-          }}
-          variant="contained"
-        >
-          Change the information
-        </Button>
-        <Button
-          sx={{
-            backgroundColor: "#ae7d73",
-            "&:hover": {
-              backgroundColor: "#8a564c",
-            },
-          }}
-          variant="contained"
-        >
-          Work in this project 🧵
         </Button>
       </Paper>
     </Grid>

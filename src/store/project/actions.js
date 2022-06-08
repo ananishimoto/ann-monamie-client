@@ -4,6 +4,43 @@ import { appLoading, appDoneLoading, setMessage } from "../appState/slice";
 import { fetchAllProjects, fetchDetails } from "./slice";
 import { selectToken } from "../user/selectors";
 import { deleteProject } from "./slice";
+import { getInspirationProjects } from "./slice";
+
+// Action to fetch all the available projects
+
+export const fetchInspirationProjects = () => {
+  return async (dispatch, getState) => {
+    dispatch(appLoading());
+    try {
+      const getAllProjects = await axios.get(`${apiUrl}/inspiration`);
+      const inspirationProjects = getAllProjects.data;
+
+      dispatch(getInspirationProjects(inspirationProjects));
+      dispatch(appDoneLoading());
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.data.message);
+        dispatch(
+          setMessage({
+            variant: "danger",
+            dismissable: true,
+            text: error.response.data.message,
+          })
+        );
+      } else {
+        console.log(error.message);
+        dispatch(
+          setMessage({
+            variant: "danger",
+            dismissable: true,
+            text: error.message,
+          })
+        );
+      }
+      dispatch(appDoneLoading());
+    }
+  };
+};
 
 // Action to fetch all the projects from the logged user
 

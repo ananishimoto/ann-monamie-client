@@ -21,34 +21,45 @@ export default function NavBar() {
       >
         <AppBar sx={{ bgcolor: "#ae7d73" }} position="sticky">
           <Toolbar>
-            {/* <Box sx={{ flexDirection: "row", justifyContent: "space-around" }}> */}
             <Box
               sx={{
                 margin: 2,
                 flexDirection: "row",
-                justifyContent: "space-around",
+                justifyContent: "space-between",
+                flexGrow: 1,
               }}
             >
               <Link href="/" underline="none" color="white">
                 <Typography>Ann Monamie</Typography>
               </Link>
             </Box>
-            {token && (
-              <>
-                <Box sx={{ margin: 2 }}>
-                  <Link href="/projects" underline="none" color="white">
-                    Your Projects
-                  </Link>
-                </Box>
-                <Box sx={{ margin: 2 }}>
-                  <Link href="/projects/new" underline="none" color="white">
-                    Create a new project
-                  </Link>
-                </Box>
-              </>
-            )}
+            <Box
+              sx={{
+                display: "flex",
+                flexGrow: 1,
+              }}
+            >
+              <Box sx={{ margin: 2 }}>
+                <Link href="/inspiration" underline="none" color="white">
+                  <Typography>Some inspiration ☁️</Typography>
+                </Link>
+              </Box>
+              {token && (
+                <>
+                  <Box sx={{ margin: 2 }}>
+                    <Link href="/projects" underline="none" color="white">
+                      Your Projects 🧶
+                    </Link>
+                  </Box>
+                  <Box sx={{ margin: 2 }}>
+                    <Link href="/projects/new" underline="none" color="white">
+                      Create a new project 📓
+                    </Link>
+                  </Box>
+                </>
+              )}
+            </Box>
             {loginLogoutControls}
-            {/* </Box> */}
           </Toolbar>
         </AppBar>
       </Box>

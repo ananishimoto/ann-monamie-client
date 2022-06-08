@@ -34,7 +34,9 @@ export default function ProjectsPage() {
   return (
     <Grid>
       <Paper style={backgroundStyle.paperContainer}>
-        <Typography variant="h4">Your projects</Typography>
+        <Typography variant="h4" sx={{ color: "#ae7d73" }}>
+          Your projects
+        </Typography>
         <ProjectCard projects={projects} />
       </Paper>
     </Grid>

@@ -28,6 +28,8 @@ export default function ProjectCard(props) {
                 <Grid align="center">
                   <NavLink to={`/projects/${project.id}`}>
                     <p>{project.name}</p>
+                    <br />
+                    <img src={project.image} alt={project.name} width="150" />
                   </NavLink>
                 </Grid>
               </Paper>
