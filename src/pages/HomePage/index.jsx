@@ -4,9 +4,12 @@ import Image from "../../images/handsImage.jpg";
 import { Button } from "@mui/material";
 import { ThemeProvider } from "@mui/system";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { selectToken } from "../../store/user/selectors";
 
 export default function HomePage() {
   const navigate = useNavigate();
+  const token = useSelector(selectToken);
 
   const style = {
     display: "flex",
@@ -22,16 +25,6 @@ export default function HomePage() {
       fontFamily: ["Water Brush"],
     },
   });
-
-  // const subTitleStyle = {
-  //   fontSize: 25,
-  //   color: "#AA336A",
-  // };
-
-  // const buttonStyle = {
-  //   size: "large",
-  //   color: "#C50743",
-  // };
 
   const backgroundStyle = {
     paperContainer: {
@@ -54,18 +47,20 @@ export default function HomePage() {
               Ann Monamie{" "}
             </Typography>
           </ThemeProvider>
-          <Button
-            onClick={() => navigate("/auth/signup")}
-            sx={{
-              backgroundColor: "#ae7d73",
-              "&:hover": {
-                backgroundColor: "#8a564c",
-              },
-            }}
-            variant="contained"
-          >
-            Sign up for free
-          </Button>
+          {!token && (
+            <Button
+              onClick={() => navigate("/auth/signup")}
+              sx={{
+                backgroundColor: "#ae7d73",
+                "&:hover": {
+                  backgroundColor: "#8a564c",
+                },
+              }}
+              variant="contained"
+            >
+              Sign up for free
+            </Button>
+          )}
         </Grid>
       </Paper>
     </Grid>

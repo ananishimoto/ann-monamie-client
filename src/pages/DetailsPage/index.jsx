@@ -1,3 +1,4 @@
+import { apiUrl } from "../../config/constants";
 import React, { useEffect } from "react";
 import { Button } from "@mui/material";
 import { NavLink, useParams } from "react-router-dom";
@@ -10,14 +11,10 @@ import Image from "../../images/watercolorBG.jpg";
 import { deleteProjectById } from "../../store/project/actions";
 import { useNavigate } from "react-router-dom";
 import Timer from "../../components/Timer";
+import { getProjectDetails } from "../../store/project/actions";
+import { selectToken } from "../../store/user/selectors";
 
 export default function DetailsPage() {
-  const details = useSelector(selectDetails);
-  // console.log("this is the details page", details);
-  const { id } = useParams();
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-
   const backgroundStyle = {
     paperContainer: {
       backgroundImage: `url(${Image})`,
@@ -29,9 +26,20 @@ export default function DetailsPage() {
     },
   };
 
+  const token = useSelector(selectToken);
+  const details = useSelector(selectDetails);
+  console.log(details);
+  const { id } = useParams();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   useEffect(() => {
-    dispatch(fetchProjectDetails(id));
-  }, [dispatch, id]);
+    if (token) {
+      dispatch(fetchProjectDetails(id));
+    } else {
+      dispatch(getProjectDetails(id));
+    }
+  }, [dispatch, token, id]);
 
   const handleDelete = () => {
     dispatch(deleteProjectById(id));
@@ -44,19 +52,36 @@ export default function DetailsPage() {
   return (
     <Grid>
       <Paper style={backgroundStyle.paperContainer}>
-        <NavLink to="/projects">
-          <Button
-            sx={{
-              backgroundColor: "#ae7d73",
-              "&:hover": {
-                backgroundColor: "#8a564c",
-              },
-            }}
-            variant="contained"
-          >
-            Back to your projects
-          </Button>
-        </NavLink>
+        {token && (
+          <NavLink to="/projects">
+            <Button
+              sx={{
+                backgroundColor: "#ae7d73",
+                "&:hover": {
+                  backgroundColor: "#8a564c",
+                },
+              }}
+              variant="contained"
+            >
+              Back to your projects
+            </Button>
+          </NavLink>
+        )}
+        {token === null && (
+          <NavLink to="/inspiration">
+            <Button
+              sx={{
+                backgroundColor: "#ae7d73",
+                "&:hover": {
+                  backgroundColor: "#8a564c",
+                },
+              }}
+              variant="contained"
+            >
+              Back to all the inspirations
+            </Button>
+          </NavLink>
+        )}
         <Grid>
           {details.map((project) => (
             <PatternCard
@@ -70,30 +95,23 @@ export default function DetailsPage() {
             />
           ))}
         </Grid>
-        {/* <Button
-          sx={{
-            backgroundColor: "#ae7d73",
-            "&:hover": {
-              backgroundColor: "#8a564c",
-            },
-          }}
-          variant="contained"
-        >
-          Change the information
-        </Button> */}
-        <Timer />
-        <Button
-          onClick={() => handleDelete()}
-          sx={{
-            backgroundColor: "#ae7d73",
-            "&:hover": {
-              backgroundColor: "#8a564c",
-            },
-          }}
-          variant="contained"
-        >
-          Delete this project 😞
-        </Button>
+        {token && (
+          <>
+            <Timer />
+            <Button
+              onClick={() => handleDelete()}
+              sx={{
+                backgroundColor: "#ae7d73",
+                "&:hover": {
+                  backgroundColor: "#8a564c",
+                },
+              }}
+              variant="contained"
+            >
+              Delete this project 😞
+            </Button>
+          </>
+        )}
       </Paper>
     </Grid>
   );

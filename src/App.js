@@ -15,6 +15,7 @@ import NavBar from "../src/components/NavBar";
 import Loading from "./components/Loading";
 import ProfilePage from "./pages/ProfilePage";
 import InspirationPage from "./pages/InspirationPage";
+import { BottomNavigation, Typography, Box } from "@mui/material";
 
 function App() {
   const dispatch = useDispatch();
@@ -38,7 +39,19 @@ function App() {
         <Route path="/auth/signup" element={<SignUpPage />} />
         <Route path="/auth/profile/:id" element={<ProfilePage />} />
         <Route path="/inspiration" element={<InspirationPage />} />
+        <Route path="/inspiration/:id" element={<DetailsPage />} />
       </Routes>
+      <BottomNavigation>
+        <Typography
+          variant="caption"
+          color="#ae7d73"
+          sx={{
+            margin: 2,
+          }}
+        >
+          ⭐ Ann Monamie - 2022 ⭐
+        </Typography>
+      </BottomNavigation>
     </div>
   );
 }

@@ -29,20 +29,39 @@ export default function ProfilePage() {
   }
 
   return (
-    <Box sx={{ display: "flex", justifyContent: "center" }}>
+    <Box>
       <Paper style={backgroundStyle.paperContainer}>
-        <Grid>
-          <Typography variant="h4" sx={{ color: "#ae7d73" }}>
-            Your profile
-          </Typography>
-          <Typography variant="h6" sx={{ color: "#ae7d73" }}>
-            Name
-          </Typography>
-          <Typography variant="p">{user.name}</Typography>
-          <Typography variant="h6" sx={{ color: "#ae7d73" }}>
-            E-mail
-          </Typography>
-          <Typography variant="p">{user.email}</Typography>
+        <Grid
+          sx={
+            {
+              // display: "flex-flow",
+              // flexDirection: "row",
+              // justifyContent: "center",
+              // alignItems: "center",
+            }
+          }
+        >
+          <Grid
+          // sx={{
+          //   display: "flex",
+          //   justifyContent: "center",
+          //   alignItems: "center",
+          // }}
+          >
+            <Typography variant="h4" sx={{ color: "#ae7d73" }}>
+              Your profile
+            </Typography>
+          </Grid>
+          <Grid>
+            <Typography variant="h6" sx={{ color: "#ae7d73" }}>
+              Name
+            </Typography>
+            <Typography variant="p">{user.name}</Typography>
+            <Typography variant="h6" sx={{ color: "#ae7d73" }}>
+              E-mail
+            </Typography>
+            <Typography variant="p">{user.email}</Typography>
+          </Grid>
         </Grid>
       </Paper>
     </Box>

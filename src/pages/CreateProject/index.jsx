@@ -212,15 +212,15 @@ export default function CreateProject() {
               </Grid>
             </FormGroup>
             <Typography>Pattern</Typography>
-            {/* <TextField
+            <TextField
               id="patternInput"
               variant="outlined"
               fullWidth
               required
               value={getPattern}
               onChange={(event) => setPattern(event.target.value)}
-            /> */}
-            <TextEditor />
+            />
+            {/* <TextEditor /> */}
             <Grid>
               <FormControl>
                 <FormLabel id="project-status-group-label">

@@ -42,6 +42,44 @@ export const fetchInspirationProjects = () => {
   };
 };
 
+// Action to fetch the specific project for the details page - User not logged in
+
+export const getProjectDetails = (id) => {
+  return async (dispatch, getState) => {
+    dispatch(appLoading());
+    try {
+      const projectDetailsInfo = await axios.get(`${apiUrl}/inspiration/${id}`);
+
+      const details = projectDetailsInfo.data;
+      console.log("thunk", details);
+
+      dispatch(fetchDetails(details));
+      dispatch(appDoneLoading());
+    } catch (error) {
+      if (error.response) {
+        console.log(error.response.data.message);
+        dispatch(
+          setMessage({
+            variant: "danger",
+            dismissable: true,
+            text: error.response.data.message,
+          })
+        );
+      } else {
+        console.log(error.message);
+        dispatch(
+          setMessage({
+            variant: "danger",
+            dismissable: true,
+            text: error.message,
+          })
+        );
+      }
+      dispatch(appDoneLoading());
+    }
+  };
+};
+
 // Action to fetch all the projects from the logged user
 
 export const fetchProjects = () => {
@@ -92,6 +130,7 @@ export const fetchProjectDetails = (id) => {
       const fetchedDetails = await axios.get(`${apiUrl}/projects/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
+      console.log("This is my other thunk", fetchedDetails);
 
       const details = fetchedDetails.data.details;
       // console.log(details);
