@@ -4,10 +4,10 @@ Ann Monamie is an organizing app to keep track of your DIY projects. The inspira
 
 ## Tecnologies used
 
-## BACKEND:
+## Backend:
 Express, REST API, Sequelize, Elephantsql with server to hosts DB instances
 
-## FRONTEND:
+## Frontend:
 React, Redux Tooolkit, Axios, Material UI (MUI) for the styling
 
 ## Wireframes:
