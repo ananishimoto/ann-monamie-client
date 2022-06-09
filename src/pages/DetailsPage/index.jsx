@@ -1,18 +1,17 @@
-import { apiUrl } from "../../config/constants";
 import React, { useEffect } from "react";
-import { Button } from "@mui/material";
+import { Button, Box, Typography } from "@mui/material";
 import { NavLink, useParams } from "react-router-dom";
 import { Grid, Paper } from "@mui/material";
 import PatternCard from "../../components/PatternCard";
 import { useDispatch, useSelector } from "react-redux";
 import { selectDetails } from "../../store/project/selectors";
-import { fetchProjectDetails } from "../../store/project/actions";
 import Image from "../../images/watercolorBG.jpg";
 import { deleteProjectById } from "../../store/project/actions";
 import { useNavigate } from "react-router-dom";
 import Timer from "../../components/Timer";
 import { getProjectDetails } from "../../store/project/actions";
 import { selectToken, selectUser } from "../../store/user/selectors";
+import ArrowBackIosNewOutlinedIcon from "@mui/icons-material/ArrowBackIosNewOutlined";
 
 export default function DetailsPage() {
   const backgroundStyle = {
@@ -24,6 +23,12 @@ export default function DetailsPage() {
       width: "100vw",
       height: "100vh",
     },
+  };
+
+  const largeIcon = {
+    width: 75,
+    height: 75,
+    color: "#8a564c",
   };
 
   const token = useSelector(selectToken);
@@ -56,81 +61,88 @@ export default function DetailsPage() {
   const ownProject = user?.projects?.includes(parseInt(id));
   return (
     <Grid>
-      <Paper style={backgroundStyle.paperContainer}>
-        {console.log("hello")}
-        {token && (
-          <NavLink to="/projects">
-            <Button
-              sx={{
-                backgroundColor: "#ae7d73",
-                "&:hover": {
-                  backgroundColor: "#8a564c",
-                },
-              }}
-              variant="contained"
-            >
-              Back to your projects
-            </Button>
-          </NavLink>
-        )}
-        {token === null && (
-          <NavLink to="/inspiration">
-            <Button
-              sx={{
-                backgroundColor: "#ae7d73",
-                "&:hover": {
-                  backgroundColor: "#8a564c",
-                },
-              }}
-              variant="contained"
-            >
-              Back to all the inspirations
-            </Button>
-          </NavLink>
-        )}
-        <Grid>
-          {details.map((project) => (
-            <PatternCard
-              key={project.id}
-              id={project.id}
-              name={project.name}
-              pattern={project.pattern}
-              image={project.image}
-              materials={project.materials}
-              tools={project.tools}
-            />
-          ))}
-        </Grid>
-        {ownProject && (
-          <>
-            <Button
-              onClick={updateForm}
-              sx={{
-                backgroundColor: "#ae7d73",
-                "&:hover": {
-                  backgroundColor: "#8a564c",
-                },
-              }}
-              variant="contained"
-            >
-              Update project information ✍️
-            </Button>
-            <Timer />
-            <Button
-              onClick={() => handleDelete()}
-              sx={{
-                backgroundColor: "#ae7d73",
-                "&:hover": {
-                  backgroundColor: "#8a564c",
-                },
-              }}
-              variant="contained"
-            >
-              Delete this project 😞
-            </Button>
-          </>
-        )}
-      </Paper>
+      <Box
+        container
+        alignItems="center"
+        // sx={{
+        //   display: "flex",
+        //   flexWrap: "wrap",
+        //   justifyContent: "space-evenly",
+        // }}
+      >
+        <Paper style={backgroundStyle.paperContainer}>
+          <Grid container alignItems="center">
+            {token && (
+              <Grid item>
+                <NavLink to="/inspiration">
+                  <ArrowBackIosNewOutlinedIcon style={largeIcon} />
+                </NavLink>
+              </Grid>
+            )}
+            {token === null && (
+              <Grid item>
+                <NavLink to="/inspiration">
+                  <ArrowBackIosNewOutlinedIcon style={largeIcon} />
+                </NavLink>
+              </Grid>
+            )}
+            <Grid item>
+              {details.map((project) => (
+                <PatternCard
+                  key={project.id}
+                  id={project.id}
+                  name={project.name}
+                  pattern={project.pattern}
+                  image={project.image}
+                  materials={project.materials}
+                  tools={project.tools}
+                />
+              ))}
+            </Grid>
+
+            {ownProject && (
+              <Grid>
+                <Box>
+                  <Timer />
+                </Box>
+                <Box>
+                  <Button
+                    onClick={updateForm}
+                    sx={{
+                      backgroundColor: "#ae7d73",
+                      "&:hover": {
+                        backgroundColor: "#8a564c",
+                      },
+                      margin: 1,
+                    }}
+                    variant="contained"
+                  >
+                    Update information ✍️
+                  </Button>
+                </Box>
+                <Box>
+                  <Typography variant="h6" sx={{ margin: 1 }}>
+                    ⚠️ Carefully ⚠️
+                  </Typography>
+                  <Button
+                    onClick={() => handleDelete()}
+                    sx={{
+                      backgroundColor: "#ae7d73",
+                      "&:hover": {
+                        backgroundColor: "#8a564c",
+                      },
+                      margin: 1,
+                    }}
+                    variant="contained"
+                  >
+                    Delete this project 😞
+                  </Button>
+                </Box>
+              </Grid>
+            )}
+          </Grid>
+        </Paper>
+      </Box>
     </Grid>
   );
 }

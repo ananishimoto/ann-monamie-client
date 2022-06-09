@@ -1,4 +1,4 @@
-import { Grid, Paper, Typography, Button } from "@mui/material";
+import { Grid, Paper, Typography, Button, Box } from "@mui/material";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -6,6 +6,9 @@ import Image from "../../images/watercolorBG.jpg";
 import { fetchInspirationProjects } from "../../store/project/actions";
 import { inspirationProjects } from "../../store/project/selectors";
 import { selectToken } from "../../store/user/selectors";
+import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
+import MoreHorizRoundedIcon from "@mui/icons-material/MoreHorizRounded";
+import { resetDetails } from "../../store/project/slice";
 
 export default function InspirationPage() {
   const dispatch = useDispatch();
@@ -26,10 +29,17 @@ export default function InspirationPage() {
     padding: 20,
     width: 500,
     margin: "20px",
+    color: "black",
+    borderRadius: 25,
+  };
+
+  const imageStyle = {
+    borderRadius: 25,
   };
 
   useEffect(() => {
     dispatch(fetchInspirationProjects());
+    dispatch(resetDetails());
   }, [dispatch]);
 
   if (inspirationProjects === null) {
@@ -57,13 +67,29 @@ export default function InspirationPage() {
             <Grid key={project.id}>
               <Paper elevation={1} style={cardBackgroundStyle}>
                 <Grid align="center">
-                  <NavLink to={`/inspiration/${project.id}`}>
-                    <Typography variant="h6" sx={{ color: "#8a564c" }}>
-                      {project.name}
-                    </Typography>
-                  </NavLink>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexWrap: "wrap",
+                      justifyContent: "space-evenly",
+                    }}
+                  >
+                    <FavoriteRoundedIcon sx={{ color: "#f6c795" }} />
+                    <NavLink to={`/inspiration/${project.id}`}>
+                      <Typography variant="h6" sx={{ color: "#8a564c" }}>
+                        {project.name}
+                      </Typography>
+                    </NavLink>
+                    <MoreHorizRoundedIcon sx={{ color: "#f6c795" }} />
+                  </Box>
                   <br />
-                  <img src={project.image} alt={project.name} height="350" />
+                  <img
+                    src={project.image}
+                    alt={project.name}
+                    height="350"
+                    // width="100%"
+                    style={imageStyle}
+                  />
                 </Grid>
               </Paper>
             </Grid>

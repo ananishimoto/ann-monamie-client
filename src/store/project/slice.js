@@ -22,6 +22,9 @@ export const projectSlice = createSlice({
     getInspirationProjects: (state, action) => {
       state.suggestions = action.payload;
     },
+    resetDetails: (state, action) => {
+      state.details = null;
+    },
   },
 });
 
@@ -30,6 +33,7 @@ export const {
   fetchDetails,
   deleteProject,
   getInspirationProjects,
+  resetDetails,
 } = projectSlice.actions;
 
 export default projectSlice.reducer;

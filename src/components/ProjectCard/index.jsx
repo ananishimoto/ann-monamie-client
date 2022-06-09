@@ -1,6 +1,8 @@
 import React from "react";
-import { Grid, Paper, Typography } from "@mui/material";
+import { Grid, Paper, Typography, Box } from "@mui/material";
 import { NavLink } from "react-router-dom";
+import FavoriteRoundedIcon from "@mui/icons-material/FavoriteRounded";
+import MoreHorizRoundedIcon from "@mui/icons-material/MoreHorizRounded";
 
 export default function ProjectCard(props) {
   const mainGrid = {
@@ -11,9 +13,14 @@ export default function ProjectCard(props) {
 
   const cardBackgroundStyle = {
     padding: 20,
-    // height: 100,
     width: 500,
     margin: "20px",
+    color: "black",
+    borderRadius: 25,
+  };
+
+  const imageStyle = {
+    borderRadius: 25,
   };
 
   return (
@@ -31,11 +38,26 @@ export default function ProjectCard(props) {
             <Grid key={project.id}>
               <Paper elevation={1} style={cardBackgroundStyle}>
                 <Grid align="center">
-                  <NavLink to={`/projects/${project.id}`}>
-                    <p>{project.name}</p>
-                    <br />
-                    <img src={project.image} alt={project.name} height="300" />
-                  </NavLink>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexWrap: "wrap",
+                      justifyContent: "space-evenly",
+                    }}
+                  >
+                    <FavoriteRoundedIcon sx={{ color: "#f6c795" }} />
+                    <NavLink to={`/projects/${project.id}`}>
+                      <p>{project.name}</p>
+                    </NavLink>
+                    <MoreHorizRoundedIcon sx={{ color: "#f6c795" }} />
+                  </Box>
+                  <br />
+                  <img
+                    src={project.image}
+                    alt={project.name}
+                    height="350"
+                    style={imageStyle}
+                  />
                 </Grid>
               </Paper>
             </Grid>

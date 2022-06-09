@@ -43,39 +43,49 @@ export default function Timer() {
     return () => clearInterval(timer);
   }, [getTimer, getSeconds, getMinutes, getHours, getDays]);
 
-  //   function startTimer() {
-
-  //     console.log("Hello");
-  //   }
-
   return (
     <>
-      <Button
-        onClick={() => setTimer(true)}
+      <Box
         sx={{
-          backgroundColor: "#ae7d73",
-          "&:hover": {
-            backgroundColor: "#8a564c",
-          },
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "flex-start",
+          margin: 1,
         }}
-        variant="contained"
       >
-        Work a little bit here 🧵
-      </Button>
-      <Button
-        onClick={() => setTimer(false)}
-        sx={{
-          backgroundColor: "#ae7d73",
-          "&:hover": {
-            backgroundColor: "#8a564c",
-          },
-        }}
-        variant="contained"
-      >
-        Let's have a break 🍵
-      </Button>
-      <Box style={timerStyle} sx={{ border: 1 }}>
-        <Typography variant="p">Time doing this project: </Typography>
+        <Box sx={{ marginRight: 5 }}>
+          <Button
+            onClick={() => setTimer(true)}
+            sx={{
+              backgroundColor: "#ae7d73",
+              "&:hover": {
+                backgroundColor: "#8a564c",
+              },
+            }}
+            variant="contained"
+          >
+            Let's craft! 🧵
+          </Button>
+        </Box>
+        <Box>
+          <Button
+            onClick={() => setTimer(false)}
+            sx={{
+              backgroundColor: "#ae7d73",
+              "&:hover": {
+                backgroundColor: "#8a564c",
+              },
+            }}
+            variant="contained"
+          >
+            Time to take a break 🍵
+          </Button>
+        </Box>
+      </Box>
+      <Box style={timerStyle} sx={{ border: 1, margin: 1 }}>
+        <Typography variant="p" sx={{ fontWeight: "bold" }}>
+          Time doing this project:{" "}
+        </Typography>
         <Box sx={{ m: 0.2 }}>{getDays}</Box>
         <Box sx={{ m: 0.2 }}>days</Box>
         <Box sx={{ m: 0.2 }}>{getHours}</Box>
