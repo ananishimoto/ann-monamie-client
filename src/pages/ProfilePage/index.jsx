@@ -31,28 +31,40 @@ export default function ProfilePage() {
   return (
     <Box>
       <Paper style={backgroundStyle.paperContainer}>
-        <Grid
-          sx={
-            {
-              // display: "flex-flow",
-              // flexDirection: "row",
-              // justifyContent: "center",
-              // alignItems: "center",
-            }
-          }
-        >
-          <Grid
-          // sx={{
-          //   display: "flex",
-          //   justifyContent: "center",
-          //   alignItems: "center",
-          // }}
-          >
+        <Box display="flex" flexDirection="row">
+          {/* <Grid
+          container
+          alignItems="center"
+          xs={12}
+          sm={6}
+          direction="row"
+          // spacing={15}
+          sx={{ flexWrap: "wrap" }}
+        > */}
+          {/* <Grid
+            item
+            xs={3} */}
+          {/* // item
+            // sx={{ */}
+          {/* //   display: "flex",
+            //   justifyContent: "center",
+            // }}
+          // > */}
+          <Box flexDirection="row">
             <Typography variant="h4" sx={{ color: "#ae7d73" }}>
               Your profile
             </Typography>
-          </Grid>
-          <Grid>
+            {/* // </Grid> */}
+          </Box>
+          <Box flexDirection="row">
+            {/* <Grid
+            item
+            xs={3} */}
+            {/* // sx={{
+            //   flexDirection: "row",
+            //   justifyContent: "center",
+            // }}
+          // > */}
             <Typography variant="h6" sx={{ color: "#ae7d73" }}>
               Name
             </Typography>
@@ -61,8 +73,10 @@ export default function ProfilePage() {
               E-mail
             </Typography>
             <Typography variant="p">{user.email}</Typography>
-          </Grid>
-        </Grid>
+          </Box>
+          {/* </Grid> */}
+        </Box>
+        {/* </Grid> */}
       </Paper>
     </Box>
   );

@@ -2,7 +2,6 @@ import React from "react";
 import { Box, Grid, Typography } from "@mui/material";
 
 export default function PatternCard(props) {
-  // console.log("This is the card", props.tools);
   const materials = props.materials;
   const tools = props.tools;
 
@@ -18,10 +17,8 @@ export default function PatternCard(props) {
       <Box
         item
         sx={{
-          // borderSpacing: 10,
           padding: 10,
           width: 200,
-          // height: 300,
           backgroundColor: "#ae7d73",
         }}
       >
@@ -33,8 +30,6 @@ export default function PatternCard(props) {
                 <li>
                   <strong>{material.name}</strong>
                 </li>
-                {/* <li>Color: {material.color}</li> */}
-                {/* <li>Amount: {material.projectMaterial.materialAmount}</li> */}
               </div>
             ))}
           </ul>

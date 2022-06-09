@@ -130,10 +130,9 @@ export const fetchProjectDetails = (id) => {
       const fetchedDetails = await axios.get(`${apiUrl}/projects/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
-      console.log("This is my other thunk", fetchedDetails);
 
       const details = fetchedDetails.data.details;
-      // console.log(details);
+      console.log("actions", details);
 
       dispatch(fetchDetails(details));
       dispatch(appDoneLoading());
@@ -162,7 +161,7 @@ export const fetchProjectDetails = (id) => {
   };
 };
 
-// Action to fetch all the projects from the logged user
+// Action to create a new project
 
 export const createNewProject = (
   name,
@@ -173,7 +172,7 @@ export const createNewProject = (
   imgUrl
 ) => {
   return async (dispatch, getState) => {
-    // const token = selectToken(getState());
+    const token = selectToken(getState());
     // console.log("Hello", name, tools, materials, pattern, status, imgUrl);
     dispatch(appLoading());
     try {
@@ -187,8 +186,10 @@ export const createNewProject = (
           pattern,
           status,
           image: imgUrl,
+        },
+        {
+          headers: { Authorization: `Bearer ${token}` },
         }
-        // headers: { Authorization: `Bearer ${token}` },
       );
 
       console.log("What is that", createProject);

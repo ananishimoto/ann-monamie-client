@@ -5,7 +5,8 @@ import LoggedIn from "./LoggedIn";
 import LoggedOut from "./LoggedOut";
 import { useSelector } from "react-redux";
 import { selectToken } from "../../store/user/selectors";
-import { Typography, Link, Box } from "@mui/material";
+import { Link } from "react-router-dom";
+import { Typography, Box } from "@mui/material";
 
 export default function NavBar() {
   const token = useSelector(selectToken);
@@ -29,7 +30,7 @@ export default function NavBar() {
                 flexGrow: 1,
               }}
             >
-              <Link href="/" underline="none" color="white">
+              <Link to="/" underline="none" color="white">
                 <Typography>Ann Monamie</Typography>
               </Link>
             </Box>
@@ -40,19 +41,19 @@ export default function NavBar() {
               }}
             >
               <Box sx={{ margin: 2 }}>
-                <Link href="/inspiration" underline="none" color="white">
+                <Link to="/inspiration" underline="none" color="white">
                   <Typography>Some inspiration ☁️</Typography>
                 </Link>
               </Box>
               {token && (
                 <>
                   <Box sx={{ margin: 2 }}>
-                    <Link href="/projects" underline="none" color="white">
+                    <Link to="/projects" underline="none" color="white">
                       Your Projects 🧶
                     </Link>
                   </Box>
                   <Box sx={{ margin: 2 }}>
-                    <Link href="/projects/new" underline="none" color="white">
+                    <Link to="/projects/new" underline="none" color="white">
                       Create a new project 📓
                     </Link>
                   </Box>

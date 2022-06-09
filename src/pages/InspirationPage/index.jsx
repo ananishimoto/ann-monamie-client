@@ -24,7 +24,6 @@ export default function InspirationPage() {
 
   const cardBackgroundStyle = {
     padding: 20,
-    // height: 100,
     width: 500,
     margin: "20px",
   };
