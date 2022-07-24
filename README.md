@@ -1,70 +1,73 @@
-# Getting Started with Create React App
+# What is Ann Monamie about?
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Ann Monamie is an organizing app to keep track of your DIY projects. The inspiration came from my own experience making crochet with a notebook with all my materials, projects I have done so far and other important information.
 
-## Available Scripts
+## Tecnologies used
 
-In the project directory, you can run:
+React, Redux Tooolkit, Axios, and Material UI (MUI) for the styling
 
-### `npm start`
+## Scripts
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- npm start: Open app in localhost:3000/
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## MVP
 
-### `npm test`
+- Home page, Sign up and login, Your projects page, details and Create new project form. Added "Inspiration Page" (explanation below)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Implementations to the MVP
 
-### `npm run build`
+- Form with text editor to the pattern input. New table in in DB to store all the days and how much time they spend doing the project. Being able to edit the created project.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Features made apart first concept
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- Inspiration Page. People can see some suggestions on this page without being loged or signed up.
+- If it's not a project own by that user they can not edit the information there.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## New feature to implement
 
-### `npm run eject`
+- Inventory based on the user's materials. Based on this page, user will be able to see all the projects in the wishlist they can do.
+- Bookmark the line you are current working in the pattern (details page).
+- Bullet journal page.
+- Timer showing date and how much time each user spent doing the projects.
+- Add inspiration projects as a favorite in "Your Project" page
+- Add image to each user and make the profile editable
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Wireframes:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Home page
+![Homepage](https://user-images.githubusercontent.com/8687154/173021523-cc5354cc-2234-4c6a-aa94-1bcfd79bd11c.png)
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Sign up and Login
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+![2](https://user-images.githubusercontent.com/8687154/173021593-6e4b25ad-8dab-4e78-a3c5-ac85f8a21c5c.png)
+![3](https://user-images.githubusercontent.com/8687154/173021605-b7487815-bbef-458d-ae72-88ebe24934a5.png)
 
-## Learn More
+### Your Projects
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+![4](https://user-images.githubusercontent.com/8687154/173021669-4f3d5173-6e18-4feb-9982-e338ed03c2c0.png)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
+### Project Details
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+![5](https://user-images.githubusercontent.com/8687154/173021714-c3532d75-f4f9-4d01-b080-d3728399783a.png)
+![6](https://user-images.githubusercontent.com/8687154/173021754-d73a9558-71d5-482c-9a82-a3be37c463b7.png)
+![7](https://user-images.githubusercontent.com/8687154/173021760-85e2634c-1566-41e8-81f4-a715d6f5983b.png)
+![8](https://user-images.githubusercontent.com/8687154/173021766-f3c25712-73f6-453f-bab2-9a9783213981.png)
 
-### Analyzing the Bundle Size
+### Create a new projects
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+![9](https://user-images.githubusercontent.com/8687154/173021804-a9f64fe3-50f8-43b2-b658-7270613b4341.png)
 
-### Making a Progressive Web App
+### Your own inventory
+ 
+![10](https://user-images.githubusercontent.com/8687154/173021936-2e011eb3-a529-47a6-8cc7-b4c90692f393.png)
+![11](https://user-images.githubusercontent.com/8687154/173021880-ea568f6f-e7eb-42f5-8722-a282d1518868.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+### Bullet Journal
 
-### Advanced Configuration
+![12](https://user-images.githubusercontent.com/8687154/173022010-e01f2041-49ef-4c28-982e-dadaa46cea38.png)
+![13](https://user-images.githubusercontent.com/8687154/173022013-b7361d15-b55b-4855-9e4a-9c957fa7b9fe.png)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+### Your profile
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![14](https://user-images.githubusercontent.com/8687154/173022041-dd2f8364-4ef5-47fa-8984-9d661cac6729.png)
