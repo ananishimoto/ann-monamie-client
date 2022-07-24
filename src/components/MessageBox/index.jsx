@@ -6,7 +6,6 @@ import { clearMessage } from "../../store/appState/slice";
 
 export default function MessageBox() {
   const message = useSelector(selectMessage);
-  console.log(message);
   const dispatch = useDispatch();
   const showMessage = message !== null;
   if (!showMessage) return null;

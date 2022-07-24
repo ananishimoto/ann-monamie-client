@@ -13,7 +13,7 @@ import { getProjectDetails } from "../../store/project/actions";
 import { selectToken, selectUser } from "../../store/user/selectors";
 import ArrowBackIosNewOutlinedIcon from "@mui/icons-material/ArrowBackIosNewOutlined";
 
-export default function DetailsPage() {
+export default function DetailsPage(props) {
   const backgroundStyle = {
     paperContainer: {
       backgroundImage: `url(${Image})`,
@@ -48,33 +48,24 @@ export default function DetailsPage() {
     navigate("/projects");
   };
 
-  const updateForm = () => {
-    console.log("This is the update form");
-    window.open("http://localhost:3000/");
-  };
+  // const updateForm = () => {
+  //   console.log("This is the update form");
+  //   window.open("http://localhost:3000/");
+  // };
 
   if (details === null) {
     return <p>loading..</p>;
   }
 
-  console.log("user", user);
   const ownProject = user?.projects?.includes(parseInt(id));
   return (
     <Grid>
-      <Box
-        container
-        alignItems="center"
-        // sx={{
-        //   display: "flex",
-        //   flexWrap: "wrap",
-        //   justifyContent: "space-evenly",
-        // }}
-      >
+      <Box container alignItems="center">
         <Paper style={backgroundStyle.paperContainer}>
           <Grid container alignItems="center">
             {token && (
               <Grid item>
-                <NavLink to="/inspiration">
+                <NavLink to="/projects">
                   <ArrowBackIosNewOutlinedIcon style={largeIcon} />
                 </NavLink>
               </Grid>
@@ -105,7 +96,7 @@ export default function DetailsPage() {
                 <Box>
                   <Timer />
                 </Box>
-                <Box>
+                {/* <Box>
                   <Button
                     onClick={updateForm}
                     sx={{
@@ -119,7 +110,7 @@ export default function DetailsPage() {
                   >
                     Update information ✍️
                   </Button>
-                </Box>
+                </Box> */}
                 <Box>
                   <Typography variant="h6" sx={{ margin: 1 }}>
                     ⚠️ Carefully ⚠️

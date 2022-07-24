@@ -14,16 +14,18 @@ import {
   RadioGroup,
   Radio,
 } from "@mui/material";
-// import { AdvancedImage } from "@cloudinary/react";
 import TipsAndUpdatesOutlinedIcon from "@mui/icons-material/TipsAndUpdatesOutlined";
 import { TextField } from "@mui/material";
-import { Button } from "@mui/material";
-import { Navigate, NavLink, useNavigate } from "react-router-dom";
+import { Button, Box } from "@mui/material";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import BGImage from "../../images/watercolorBG.jpg";
 import { createNewProject } from "../../store/project/actions";
 import TextEditor from "../../components/TextEditor";
 import { useRadioGroup } from "@mui/material/RadioGroup";
+import ArrowBackIosNewOutlinedIcon from "@mui/icons-material/ArrowBackIosNewOutlined";
+import { addUserProject } from "../../store/user/slice";
+import { getUserWithStoredToken } from "../../store/user/actions";
 
 export default function CreateProject() {
   const backgroundStyle = {
@@ -44,6 +46,12 @@ export default function CreateProject() {
     margin: "20px auto",
   };
 
+  const largeIcon = {
+    width: 75,
+    height: 75,
+    color: "#8a564c",
+  };
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -56,27 +64,17 @@ export default function CreateProject() {
   const [getImage, setImage] = useState("");
   const [getStatus, setStatus] = useState("Wishlist");
 
-  // useEffect(() => {
-  //   export const createdProject = () => {
-  //     navigate("/projects");
-  //   };
-  // }, [createdProject]);
-
   useEffect(() => {
     async function fetchMaterialsAndTools() {
       const response = await axios.get(`${apiUrl}/materials`);
       setMaterials(response.data.materials);
       setTools(response.data.tools);
-      // console.log("response", getMaterials, getTools);
-      // console.log({ getTools });
     }
     fetchMaterialsAndTools();
   }, [dispatch]);
 
   const checkedToolBox = (event) => {
-    // console.log("test", event.target.checked);
     const id = parseInt(event.target.value);
-    // console.log(id);
     if (event.target.checked) {
       setNeededTools([...getNeededTools, id]);
     } else {
@@ -86,9 +84,7 @@ export default function CreateProject() {
   };
 
   const checkedMaterialBox = (event) => {
-    // console.log("test", event.target.checked);
     const id = parseInt(event.target.value);
-    // console.log(id);
     if (event.target.checked) {
       setNeededMaterials([...getNeededMaterials, id]);
     } else {
@@ -100,7 +96,6 @@ export default function CreateProject() {
   };
 
   async function uploadImage(files) {
-    console.log(files[0]);
     const formData = new FormData();
     formData.append("file", getImage);
     formData.append("upload_preset", "default_preset");
@@ -109,15 +104,11 @@ export default function CreateProject() {
       "https://api.cloudinary.com/v1_1/nishimoto/image/upload",
       formData
     );
-    // .then((response) => {
-    //   console.log(response);
-    // });
   }
 
   async function submitNewProjectForm(event) {
     event.preventDefault();
     const image = await uploadImage(getImage);
-    // console.log("image", image.data.url);
     dispatch(
       createNewProject(
         getName,
@@ -131,162 +122,134 @@ export default function CreateProject() {
     navigate("/projects");
   }
 
-  // setName("");
-  // setPattern("");
-  // setImage("");
-
-  // console.log(
-  //   "working?",
-  //   getName,
-  //   getNeededTools,
-  //   getNeededMaterials,
-  //   getPattern,
-  //   getStatus
-  // getImage
-  // );
-
   return (
     <Grid>
-      <Paper style={backgroundStyle.paperContainer}>
-        <NavLink to="/projects">
-          <Button
-            sx={{
-              backgroundColor: "#ae7d73",
-              "&:hover": {
-                backgroundColor: "#8a564c",
-              },
-            }}
-            variant="contained"
-          >
-            Back to your projects
-          </Button>
-        </NavLink>
-        <Paper elevation={5} style={newProjectBackgroundStyle}>
-          <Grid align="center">
-            <Avatar>
-              <TipsAndUpdatesOutlinedIcon />
-            </Avatar>
-            <h1>Create a new project</h1>
+      <Grid container alignItems="center">
+        <Paper style={backgroundStyle.paperContainer}>
+          <Grid item>
+            <NavLink to="/projects">
+              <ArrowBackIosNewOutlinedIcon style={largeIcon} />
+            </NavLink>
           </Grid>
-          <form onSubmit={submitNewProjectForm}>
-            <Typography>Project Name</Typography>
-            <TextField
-              id="nameInput"
-              variant="outlined"
-              fullWidth
-              required
-              value={getName}
-              onChange={(event) => setName(event.target.value)}
-            />
-            <Typography>Tools</Typography>
-            <FormGroup>
-              <Grid>
-                {getTools &&
-                  getTools.map((tool) => (
-                    <FormControlLabel
-                      key={tool.id}
-                      control={
-                        <Checkbox value={tool.id} onChange={checkedToolBox} />
-                      }
-                      label={tool.name}
-                    />
-                  ))}
-              </Grid>
-            </FormGroup>
-            <Typography>Materials</Typography>
-            <FormGroup>
-              <Grid>
-                {getMaterials &&
-                  getMaterials.map((material) => (
-                    <FormControlLabel
-                      key={material.id}
-                      control={
-                        <Checkbox
-                          value={material.id}
-                          onChange={checkedMaterialBox}
-                        />
-                      }
-                      label={material.name}
-                    />
-                  ))}
-              </Grid>
-            </FormGroup>
-            <Typography>Pattern</Typography>
-            <TextField
-              id="patternInput"
-              variant="outlined"
-              fullWidth
-              required
-              value={getPattern}
-              onChange={(event) => setPattern(event.target.value)}
-            />
-            {/* <TextEditor /> */}
+          <Paper elevation={5} style={newProjectBackgroundStyle}>
             <Grid>
-              <FormControl>
-                <FormLabel id="project-status-group-label">
-                  Project Status
-                </FormLabel>
-                <RadioGroup
-                  row
-                  value={getStatus}
-                  onChange={(event) => setStatus(event.target.value)}
-                  aria-labelledby="projectStatus"
-                  defaultValue="allStatus"
-                  name="projectStatusButtons"
+              <Grid align="center">
+                <Avatar>
+                  <TipsAndUpdatesOutlinedIcon />
+                </Avatar>
+                <h1>Create a new project</h1>
+              </Grid>
+              <form onSubmit={submitNewProjectForm}>
+                <Typography>Project Name</Typography>
+                <TextField
+                  id="nameInput"
+                  variant="outlined"
+                  fullWidth
+                  required
+                  value={getName}
+                  onChange={(event) => setName(event.target.value)}
+                />
+                <Typography>Tools</Typography>
+                <FormGroup>
+                  <Grid>
+                    {getTools &&
+                      getTools.map((tool) => (
+                        <FormControlLabel
+                          key={tool.id}
+                          control={
+                            <Checkbox
+                              value={tool.id}
+                              onChange={checkedToolBox}
+                            />
+                          }
+                          label={tool.name}
+                        />
+                      ))}
+                  </Grid>
+                </FormGroup>
+                <Typography>Materials</Typography>
+                <FormGroup>
+                  <Grid>
+                    {getMaterials &&
+                      getMaterials.map((material) => (
+                        <FormControlLabel
+                          key={material.id}
+                          control={
+                            <Checkbox
+                              value={material.id}
+                              onChange={checkedMaterialBox}
+                            />
+                          }
+                          label={material.name}
+                        />
+                      ))}
+                  </Grid>
+                </FormGroup>
+                <Typography>Pattern</Typography>
+                <TextField
+                  id="patternInput"
+                  variant="outlined"
+                  fullWidth
+                  required
+                  value={getPattern}
+                  onChange={(event) => setPattern(event.target.value)}
+                />
+                {/* <TextEditor /> */}
+                <Grid>
+                  <FormControl>
+                    <FormLabel id="project-status-group-label">
+                      Project Status
+                    </FormLabel>
+                    <RadioGroup
+                      row
+                      value={getStatus}
+                      onChange={(event) => setStatus(event.target.value)}
+                      aria-labelledby="projectStatus"
+                      defaultValue="allStatus"
+                      name="projectStatusButtons"
+                    >
+                      <FormControlLabel
+                        value="Wishlist"
+                        control={<Radio />}
+                        label="Wishlist"
+                      />
+                      <FormControlLabel
+                        value="WIP"
+                        control={<Radio />}
+                        label="Work in Progress"
+                      />
+                      <FormControlLabel
+                        value="Finished"
+                        control={<Radio />}
+                        label="Finished"
+                      />
+                    </RadioGroup>
+                  </FormControl>
+                </Grid>
+                <Typography>Image</Typography>
+                <input
+                  type="file"
+                  onChange={(event) => setImage(event.target.files[0])}
+                />
+                <Button
+                  sx={{
+                    backgroundColor: "#ae7d73",
+                    "&:hover": {
+                      backgroundColor: "#8a564c",
+                    },
+                  }}
+                  type="submit"
+                  color="secondary"
+                  variant="contained"
+                  fullWidth
                 >
-                  <FormControlLabel
-                    value="Wishlist"
-                    control={<Radio />}
-                    label="Wishlist"
-                  />
-                  <FormControlLabel
-                    value="WIP"
-                    control={<Radio />}
-                    label="Work in Progress"
-                  />
-                  <FormControlLabel
-                    value="Finished"
-                    control={<Radio />}
-                    label="Finished"
-                  />
-                </RadioGroup>
-              </FormControl>
+                  Create!
+                </Button>
+              </form>
             </Grid>
-            <Typography>Image</Typography>
-            <input
-              type="file"
-              onChange={(event) => setImage(event.target.files[0])}
-            />
-            {/* <TextField
-              id="imageInput"
-              placeholder="Upload your pictures here"
-              variant="outlined"
-              fullWidth
-              value={getImage}
-              onChange={(event) => setImage(event.target.value)}
-            /> */}
-            {/* <AdvancedImage
-              style={{ width: 400 }}
-              cloudname="nishimoto"
-              publicId="https://res.cloudinary.com/nishimoto/image/upload/v1654509497/vbfwiebhbn3hqkhu6ayf.png"
-            /> */}
-            <Button
-              sx={{
-                backgroundColor: "#ae7d73",
-                "&:hover": {
-                  backgroundColor: "#8a564c",
-                },
-              }}
-              type="submit"
-              color="secondary"
-              variant="contained"
-              fullWidth
-            >
-              Create!
-            </Button>
-          </form>
+          </Paper>
         </Paper>
-      </Paper>
+      </Grid>
     </Grid>
   );
 }

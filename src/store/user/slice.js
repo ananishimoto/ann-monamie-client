@@ -22,9 +22,13 @@ export const userSlice = createSlice({
     tokenStillValid: (state, action) => {
       state.profile = action.payload.user;
     },
+    addUserProject: (state, action) => {
+      state.profile = { ...state.profile, ...action.payload };
+    },
   },
 });
 
-export const { loginSuccess, logOut, tokenStillValid } = userSlice.actions;
+export const { loginSuccess, logOut, tokenStillValid, addUserProject } =
+  userSlice.actions;
 
 export default userSlice.reducer;

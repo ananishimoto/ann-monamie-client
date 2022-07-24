@@ -30,7 +30,7 @@ export default function NavBar() {
                 flexGrow: 1,
               }}
             >
-              <Link to="/" underline="none" color="white">
+              <Link to="/" style={{ textDecoration: "none", color: "white" }}>
                 <Typography>Ann Monamie</Typography>
               </Link>
             </Box>
@@ -41,19 +41,28 @@ export default function NavBar() {
               }}
             >
               <Box sx={{ margin: 2 }}>
-                <Link to="/inspiration" underline="none" color="white">
+                <Link
+                  to="/inspiration"
+                  style={{ textDecoration: "none", color: "white" }}
+                >
                   <Typography>Some inspiration ☁️</Typography>
                 </Link>
               </Box>
               {token && (
                 <>
                   <Box sx={{ margin: 2 }}>
-                    <Link to="/projects" underline="none" color="white">
+                    <Link
+                      to="/projects"
+                      style={{ textDecoration: "none", color: "white" }}
+                    >
                       Your Projects 🧶
                     </Link>
                   </Box>
                   <Box sx={{ margin: 2 }}>
-                    <Link to="/projects/new" underline="none" color="white">
+                    <Link
+                      to="/projects/new"
+                      style={{ textDecoration: "none", color: "white" }}
+                    >
                       Create a new project 📓
                     </Link>
                   </Box>

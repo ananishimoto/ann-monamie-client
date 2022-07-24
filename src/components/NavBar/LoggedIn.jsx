@@ -21,7 +21,10 @@ export default function LoggedIn() {
 
   return (
     <>
-      <NavLink to={`/auth/profile/${user.id}`}>
+      <NavLink
+        to={`/auth/profile/${user.id}`}
+        style={{ textDecoration: "none" }}
+      >
         <MenuItem sx={{ color: "white" }}>
           {user && `Hello, ${user.name}`}
         </MenuItem>

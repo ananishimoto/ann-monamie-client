@@ -1,9 +1,10 @@
-import { Grid, Paper, Typography, Box } from "@mui/material";
+import { Paper, Typography, Box, Button } from "@mui/material";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { selectUser } from "../../store/user/selectors";
 import Image from "../../images/watercolorBG.jpg";
 import { getUserWithStoredToken } from "../../store/user/actions";
+import FaceIcon from "@mui/icons-material/Face";
 
 export default function ProfilePage() {
   const dispatch = useDispatch();
@@ -20,6 +21,12 @@ export default function ProfilePage() {
     },
   };
 
+  const largeIcon = {
+    width: 50,
+    height: 50,
+    color: "#8a564c",
+  };
+
   useEffect(() => {
     dispatch(getUserWithStoredToken());
   }, [dispatch]);
@@ -29,42 +36,44 @@ export default function ProfilePage() {
   }
 
   return (
-    <Box>
-      <Paper style={backgroundStyle.paperContainer}>
-        <Box display="flex" flexDirection="row">
-          {/* <Grid
-          container
-          alignItems="center"
-          xs={12}
-          sm={6}
-          direction="row"
-          // spacing={15}
-          sx={{ flexWrap: "wrap" }}
-        > */}
-          {/* <Grid
-            item
-            xs={3} */}
-          {/* // item
-            // sx={{ */}
-          {/* //   display: "flex",
-            //   justifyContent: "center",
-            // }}
-          // > */}
-          <Box flexDirection="row">
-            <Typography variant="h4" sx={{ color: "#ae7d73" }}>
+    <Paper style={backgroundStyle.paperContainer}>
+      <Box
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        height="50vh"
+      >
+        <Box container display="flex" alignItems="flex-start">
+          <Box item xs={4} sx={{ marginRight: 10 }}>
+            <Typography
+              variant="h3"
+              fontWeight="bold"
+              sx={{ color: "#ae7d73" }}
+            >
               Your profile
             </Typography>
-            {/* // </Grid> */}
+            {/* <Button
+              sx={{
+                backgroundColor: "#ac837c",
+                "&:hover": {
+                  backgroundColor: "#8a564c",
+                },
+                marginTop: 3,
+              }}
+              variant="contained"
+            >
+              Update information ✍️
+            </Button> */}
+            <Typography
+              variant="h6"
+              fontWeight="normal"
+              sx={{ color: "#ae7d73" }}
+            >
+              Check all your personal info
+            </Typography>
           </Box>
-          <Box flexDirection="row">
-            {/* <Grid
-            item
-            xs={3} */}
-            {/* // sx={{
-            //   flexDirection: "row",
-            //   justifyContent: "center",
-            // }}
-          // > */}
+          <Box item xs={4}>
+            <FaceIcon style={largeIcon} />
             <Typography variant="h6" sx={{ color: "#ae7d73" }}>
               Name
             </Typography>
@@ -74,10 +83,8 @@ export default function ProfilePage() {
             </Typography>
             <Typography variant="p">{user.email}</Typography>
           </Box>
-          {/* </Grid> */}
         </Box>
-        {/* </Grid> */}
-      </Paper>
-    </Box>
+      </Box>
+    </Paper>
   );
 }
